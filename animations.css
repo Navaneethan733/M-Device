@@ -1,21 +1,23 @@
-/* CSS Reveal Animations */
-.reveal {
+/* CSS Reveal Animations — gated behind js-ready so content is always visible without JS */
+body.js-ready .reveal {
     opacity: 0;
     transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.reveal.active {
+body.js-ready .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Delay for staggered children */
-.reveal-stagger > * {
+/* Staggered children */
+body.js-ready .reveal-stagger > * {
     opacity: 0;
     transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.reveal-stagger.active > * {
+body.js-ready .reveal-stagger.active > * {
     opacity: 1;
     transform: translateY(0);
 }

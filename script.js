@@ -9,6 +9,17 @@ window.addEventListener('load', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    document.body.classList.add('js-ready');
+
+    try {
+        if (typeof SplitText !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger, SplitText);
+        } else {
+            gsap.registerPlugin(ScrollTrigger);
+        }
+    } catch (e) {
+        console.warn('GSAP plugin registration error:', e);
+    }
 
     document.querySelectorAll('.draw-path').forEach(path => {
         const length = path.getTotalLength();
@@ -147,14 +158,23 @@ document.addEventListener('DOMContentLoaded', () => {
         return rect.top < window.innerHeight && rect.bottom > 0;
     }
 
-    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
-        if (isInViewport(el)) {
-            gsap.set(el, { opacity: 1, y: 0, x: 0 });
-            el.classList.add('active');
-            el.querySelectorAll('*').forEach(child => {
-                gsap.set(child, { opacity: 1, y: 0, x: 0 });
-            });
-        }
+    function activateVisibleReveals() {
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+            if (isInViewport(el)) {
+                el.classList.add('active');
+                gsap.set(el, { opacity: 1, y: 0, x: 0 });
+                el.querySelectorAll('*').forEach(child => {
+                    gsap.set(child, { opacity: 1, y: 0, x: 0 });
+                });
+            }
+        });
+    }
+
+    activateVisibleReveals();
+
+    window.addEventListener('load', () => {
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+        activateVisibleReveals();
     });
 
 
