@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 – Page Not Found | Stackly Medical</title>
+    <meta name="description" content="Oops! This page has flatlined. Let us help you find your way back." />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/webp" href="Asset/favicon.webp" />
+    <style>
+      .page-404 {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: #f8fafc;
+        overflow: hidden;
+      }
+
+      .err-scene {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+        position: relative;
+      }
+
+      .err-bg-blobs {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .err-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.12;
+        animation: blobFloat 8s ease-in-out infinite alternate;
+      }
+
+      .err-blob-1 {
+        width: 500px; height: 500px;
+        background: var(--primary-blue);
+        top: -100px; left: -100px;
+      }
+
+      .err-blob-2 {
+        width: 400px; height: 400px;
+        background: var(--dark-blue);
+        bottom: -80px; right: -80px;
+        animation-delay: -4s;
+      }
+
+      .err-blob-3 {
+        width: 300px; height: 300px;
+        background: #4facfe;
+        top: 50%; right: 20%;
+        animation-delay: -2s;
+      }
+
+      @keyframes blobFloat {
+        from { transform: scale(1) translate(0, 0); }
+        to   { transform: scale(1.1) translate(30px, 20px); }
+      }
+
+      .err-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 700px;
+      }
+
+      .err-badge {
+        background: #fff0f0;
+        color: #e53e3e;
+        border: 1px solid #fed7d7;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 20px;
+        margin-bottom: 28px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pulse-dot {
+        width: 8px; height: 8px;
+        background: #e53e3e;
+        border-radius: 50%;
+        animation: pulseDot 1.2s ease-in-out infinite;
+      }
+
+      @keyframes pulseDot {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50%       { transform: scale(1.6); opacity: 0.6; }
+      }
+
+      .err-404-wrap {
+        position: relative;
+        margin-bottom: 32px;
+        line-height: 1;
+      }
+
+      .err-404-num {
+        font-size: clamp(120px, 20vw, 220px);
+        font-weight: 900;
+        letter-spacing: -8px;
+        background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 50%, #4facfe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        user-select: none;
+      }
+
+      .err-icon-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: clamp(40px, 8vw, 80px);
+        animation: heartbeat 1.5s ease-in-out infinite;
+        filter: drop-shadow(0 4px 16px rgba(229,62,62,0.35));
+      }
+
+      @keyframes heartbeat {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); }
+        14%       { transform: translate(-50%, -50%) scale(1.15); }
+        28%       { transform: translate(-50%, -50%) scale(1); }
+        42%       { transform: translate(-50%, -50%) scale(1.12); }
+        56%       { transform: translate(-50%, -50%) scale(1); }
+      }
+
+      .ecg-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 36px;
+        position: relative;
+        height: 60px;
+      }
+
+      .ecg-container svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .ecg-path {
+        fill: none;
+        stroke: var(--primary-blue);
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .ecg-line-flat {
+        stroke: #e53e3e;
+        stroke-width: 2.5;
+        stroke-dasharray: 6 4;
+      }
+
+      .ecg-anim-path {
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+        animation: drawEcg 2s ease-out forwards 0.8s, ecgRepeat 4s ease-in-out infinite 2.8s;
+      }
+
+      @keyframes drawEcg {
+        to { stroke-dashoffset: 0; }
+      }
+
+      @keyframes ecgRepeat {
+        0%   { stroke-dashoffset: 0; opacity: 1; }
+        80%  { stroke-dashoffset: 0; opacity: 1; }
+        90%  { stroke-dashoffset: 600; opacity: 0; }
+        91%  { stroke-dashoffset: 600; opacity: 0; }
+        100% { stroke-dashoffset: 0; opacity: 1; }
+      }
+
+      .err-headline {
+        font-size: clamp(22px, 4vw, 34px);
+        font-weight: 800;
+        color: var(--dark-blue);
+        margin-bottom: 14px;
+        line-height: 1.2;
+      }
+
+      .err-sub {
+        font-size: 16px;
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin-bottom: 40px;
+        max-width: 450px;
+      }
+
+      .err-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 48px;
+      }
+
+      .err-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+        color: #fff;
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 15px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 8px 24px rgba(0, 97, 255, 0.3);
+      }
+
+      .err-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(0, 97, 255, 0.4);
+        color: #fff;
+      }
+
+      .err-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        color: var(--dark-blue);
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 15px;
+        border: 2px solid #e2e8f0;
+        transition: transform 0.2s, border-color 0.2s;
+      }
+
+      .err-btn-secondary:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary-blue);
+        color: var(--primary-blue);
+      }
+
+      .err-quick-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .err-quick-links span {
+        font-size: 13px;
+        color: var(--text-muted);
+        align-self: center;
+      }
+
+      .err-quick-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-main);
+        text-decoration: none;
+        transition: 0.25s;
+      }
+
+      .err-quick-link:hover {
+        border-color: var(--primary-blue);
+        color: var(--primary-blue);
+        background: #f0f6ff;
+      }
+
+      .err-quick-link .ql-icon {
+        font-size: 16px;
+      }
+
+      .err-floating-pills {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .err-pill {
+        position: absolute;
+        font-size: 28px;
+        animation: floatPill linear infinite;
+        opacity: 0.15;
+      }
+
+      @keyframes floatPill {
+        0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+        10%  { opacity: 0.15; }
+        90%  { opacity: 0.15; }
+        100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+      }
+
+      @media (max-width: 600px) {
+        .err-actions { flex-direction: column; align-items: center; }
+        .err-btn-primary, .err-btn-secondary { width: 100%; justify-content: center; }
+      }
+    </style>
+  </head>
+  <body class="page-404">
+
+    <div id="preloader">
+      <div class="preloader-inner">
+        <div class="preloader-ripple"></div>
+        <div class="preloader-ripple"></div>
+        <img src="Asset/logo.webp" alt="Loading..." class="preloader-logo">
+      </div>
+      <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+    </div>
+
+    <nav class="top-nav">
+      <div class="container">
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li class="dropdown">
+            <a href="index.html" class="dropbtn">Home <span class="arrow-down"></span></a>
+            <ul class="dropdown-content">
+              <li><a href="index.html">Home 1</a></li>
+              <li><a href="index2.html">Home 2</a></li>
+            </ul>
+          </li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="user-actions">
+          <a href="./login.html" class="login-link">Login</a> or
+          <a href="./signup.html" class="register-link">Register</a>
+          <a href="cart.html" class="cart-link"><img src="Asset/cart.webp" alt="Cart" /> My Cart:
+            <span class="cart-count">0</span></a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html"><img src="Asset/logo.webp" alt="Stackly Logo" /></a>
+        </div>
+        <div class="contact-info">
+          <p class="phone-label">Call Us: 9876543210</p>
+          <p class="hours">from 8:00am to 9:00pm (Mon-Sun) FREE by US</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="err-scene">
+
+      <div class="err-bg-blobs">
+        <div class="err-blob err-blob-1"></div>
+        <div class="err-blob err-blob-2"></div>
+        <div class="err-blob err-blob-3"></div>
+      </div>
+
+      <div class="err-floating-pills" aria-hidden="true" id="pills-container"></div>
+
+      <div class="err-content" id="err-content">
+
+        <div class="err-badge">
+          <div class="pulse-dot"></div>
+          CRITICAL ERROR — ROOM 404
+        </div>
+
+        <div class="err-404-wrap">
+          <div class="err-404-num" id="err-num">404</div>
+          <div class="err-icon-overlay" aria-hidden="true">🫀</div>
+        </div>
+
+        <div class="ecg-container" aria-hidden="true">
+          <svg viewBox="0 0 500 60" preserveAspectRatio="none">
+            <line x1="0" y1="30" x2="500" y2="30" class="ecg-path ecg-line-flat" stroke-opacity="0.2" />
+            <path
+              class="ecg-path ecg-anim-path"
+              d="M0,30 L60,30 L75,30 L80,10 L85,50 L90,8 L100,52 L108,30 L160,30 L175,30 L180,10 L185,50 L190,8 L200,52 L208,30 L260,30 L275,30 L280,10 L285,50 L290,8 L300,52 L308,30 L360,30 L375,30 L380,10 L385,50 L390,8 L400,52 L408,30 L500,30"
+            />
+          </svg>
+        </div>
+
+        <h1 class="err-headline">Patient Not Found</h1>
+        <p class="err-sub">
+          The page you were looking for has been admitted to the void.
+          Our team has been notified — but in the meantime, let's get you back to health.
+        </p>
+
+        <div class="err-actions">
+          <a href="index.html" class="err-btn-primary">
+            🏠 Back to Home
+          </a>
+          <a href="shop.html" class="err-btn-secondary">
+            🛒 Browse Shop
+          </a>
+        </div>
+
+        <div class="err-quick-links">
+          <span>Or try:</span>
+          <a href="service.html" class="err-quick-link"><span class="ql-icon">🔬</span> Services</a>
+          <a href="about.html" class="err-quick-link"><span class="ql-icon">🏥</span> About Us</a>
+          <a href="blog.html" class="err-quick-link"><span class="ql-icon">📰</span> Blog</a>
+          <a href="contact.html" class="err-quick-link"><span class="ql-icon">📞</span> Contact</a>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="footer-logo">
+            <img src="Asset/logo.webp" alt="Stackly Logo">
+          </div>
+          <p class="copyright">&copy; 2026 Stackly. All Rights Reserved.</p>
+          <div class="payment-methods">
+            <img src="Asset/payment-methods.webp" alt="Payment">
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      const emojis = ['💊','🩺','🩹','🔬','💉','🩻','🧬','❤️‍🩹','🫁','🧪'];
+      const container = document.getElementById('pills-container');
+      for (let i = 0; i < 18; i++) {
+        const el = document.createElement('div');
+        el.className = 'err-pill';
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDuration = (10 + Math.random() * 20) + 's';
+        el.style.animationDelay = (-Math.random() * 25) + 's';
+        el.style.fontSize = (18 + Math.random() * 22) + 'px';
+        container.appendChild(el);
+      }
+
+      window.addEventListener('load', () => {
+        if (typeof gsap !== 'undefined') {
+          gsap.from('#err-content', { opacity: 0, y: 50, duration: 1, ease: 'power3.out' });
+          gsap.from('#err-num', { scale: 0.5, duration: 1.2, ease: 'elastic.out(1, 0.5)', delay: 0.2 });
+        }
+      });
+    </script>
+  </body>
+</html>

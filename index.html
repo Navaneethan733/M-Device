@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="animations.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/webp" href="Asset/favicon.webp" />
+  </head>
+  <body>
+  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-ripple"></div>
+      <div class="preloader-ripple"></div>
+      <img src="Asset/logo.webp" alt="Loading..." class="preloader-logo">
+    </div>
+    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+  </div>
+    
+    <nav class="top-nav">
+      <div class="container">
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+        <ul class="nav-links">
+          <li class="dropdown">
+            <a href="index.html" class="dropbtn">Home <span class="arrow-down"></span></a>
+            <ul class="dropdown-content">
+              <li><a href="index.html">Home 1</a></li>
+              <li><a href="index2.html">Home 2</a></li>
+            </ul>
+          </li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+        <div class="user-actions">
+          <a href="./login.html" class="login-link">Login</a> or
+          <a href="./signup.html" class="register-link">Register</a>
+          <a href="cart.html" class="cart-link"
+            ><img src="Asset/cart.webp" alt="Cart" /> My Cart:
+            <span class="cart-count">0</span></a
+          >
+        </div>
+      </div>
+    </nav>
+
+    
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html"><img src="Asset/logo.webp" alt="Stackly Logo" /></a>
+        </div>
+
+        <div class="contact-info">
+          <p class="phone-label">Call Us:9876543210</p>
+          <p class="hours">from 8:00am to 9:00pm (Mon-Sun) FREE by US</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="marquee-ticker" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Free Shipping on Orders Over $99</span>
+        <span>24/7 Customer Support</span>
+        <span>Certified Medical Equipment</span>
+        <span>Up to 25% Off This Week</span>
+        <span>ISO & CE Certified Products</span>
+        <span>Fast Delivery Nationwide</span>
+        <span>Free Shipping on Orders Over $99</span>
+        <span>24/7 Customer Support</span>
+        <span>Certified Medical Equipment</span>
+        <span>Up to 25% Off This Week</span>
+        <span>ISO & CE Certified Products</span>
+        <span>Fast Delivery Nationwide</span>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-slider">
+        
+        <div class="hero-slide active" style="background-image: url('Asset/Background 1.webp');">
+          <div class="container hero-content">
+            <div class="hero-text">
+              <h1 class="animate-me">Oxygen and Aerosol Therapy Products</h1>
+              <p class="promo-info">Get Up to</p>
+              <div class="discount">25% Off</div>
+              <a href="shop.html" class="shop-btn">
+                <img src="Asset/Arrow.webp" alt="Shop Icon" class="btn-icon" />
+                SHOP NOW
+              </a>
+            </div>
+            <div class="hero-image">
+              <img src="Asset/Rectangle-34-9.webp" alt="Medical Masks" class="floating-img" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-slide" style="background-image: url('Asset/Background 2.webp');">
+          <div class="container hero-content">
+            <div class="hero-text">
+              <h1 class="animate-me">Surgical Instruments Precision Tools</h1>
+              <p class="promo-info">Professional Grade</p>
+              <div class="discount">Store Wide</div>
+              <a href="shop.html" class="shop-btn">
+                <img src="Asset/Arrow.webp" alt="Shop Icon" class="btn-icon" />
+                SHOP NOW
+              </a>
+            </div>
+            <div class="hero-image">
+              <img src="Asset/Rectangle-14-28-420x560.webp" alt="Surgical Tools" class="floating-img" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-slide" style="background-image: url('Asset/Background 3.webp');">
+          <div class="container hero-content">
+            <div class="hero-text">
+              <h1 class="animate-me">Advanced Diagnostic Medical Equipment</h1>
+              <p class="promo-info">Reliable Results</p>
+              <div class="discount">New Arrivals</div>
+              <a href="shop.html" class="shop-btn">
+                <img src="Asset/Arrow.webp" alt="Shop Icon" class="btn-icon" />
+                SHOP NOW
+              </a>
+            </div>
+            <div class="hero-image">
+              <img src="Asset/Rectangle-34-10.webp" alt="Diagnostic Equipment" class="floating-img" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-dots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+      </div>
+    </section>
+
+    
+    <section class="features">
+        <div class="container">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0061FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M7 15h.01"/><path d="M11 15h2"/></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>100% Secure payments</h3>
+                    <p>Dislike a men who beguiled</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0061FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Free delivery beguiled</h3>
+                    <p>Dislike men who</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0061FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/><path d="M16 10l-4-4-4 4"/></svg>
+                </div>
+                <div class="feature-text">
+                    <h3>Satisfied or refunded who</h3>
+                    <p>are so beguiled Dislike</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured container reveal">
+        <div class="featured-header">
+            <h2>Featured Categories</h2>
+            <a href="#">ALL CATEGORIES</a>
+        </div>
+
+        <div class="featured-grid reveal-stagger">
+            
+            <div class="card card-large">
+                <a href="./shop.html"><div class="card-content">
+                    <h3>H-110<br>Analyzer Dirui<br>Semiautomatic</h3>
+                    <button class="arrow-btn">→</button>
+                </div>
+                <img src="Asset/Rectangle-34-8.webp" alt="Analyzer"></a>
+            </div>
+
+            
+            <div class="card card-tall">
+                <a href="./shop.html"><div class="card-content">
+                    <h3>H-110<br>Analyzer Dirui<br>Semiautomatic</h3>
+                    <button class="arrow-btn">→</button>
+                </div>
+                <img src="Asset/Rectangle-14-23.webp" alt="Operating Room"></a>
+            </div>
+
+            
+            <div class="card">
+                <a href="./shop.html"><div class="card-content">
+                    <h3>ACP Sign<br>Projector - 700<br>Unicos</h3>
+                    <button class="arrow-btn">→</button>
+                </div>
+                <img src="Asset/Rectangle-14-31-420x560.webp" alt="Device"></a>
+            </div>
+
+            
+            <div class="card dark">
+                <a href="./shop.html"><div class="card-content">
+                    <h3>Medical Disposable<br>Needles</h3>
+                    <button class="arrow-btn">→</button>
+                </div>
+                <img src="Asset/Rectangle-14-29-600x600.webp" alt="Needles"></a>
+            </div>
+
+            
+            <div class="card blue">
+                <a href="./shop.html"><div class="card-content">
+                    <h3>Clothing Sets For<br>Surgeons</h3>
+                    <button class="arrow-btn">→</button>
+                </div>
+                <img src="Asset/Rectangle-14-32-600x600.webp" alt="Clothing"></a>
+            </div>
+
+            
+            <div class="card">
+                <a href="./shop.html"><div class="card-content">
+                    <h3>ACP Sign<br>Projector - 700<br>Unicos</h3>
+                    <button class="arrow-btn">→</button>
+                </div>
+                <img src="Asset/Rectangle-46-1.webp" alt="Equipment"></a>
+            </div>
+        </div>
+    </section>
+
+    <div class="integration-container">
+  <div class="animate-me" aria-hidden="true">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius id magni aut, voluptatibus consequuntur minima nemo harum commodi minus unde accusamus veritatis voluptatem. Aspernatur impedit inventore voluptatibus veniam!
+  </div>
+  <p class="sr-only">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius id magni aut, voluptatibus consequuntur minima nemo harum commodi minus unde accusamus veritatis voluptatem. Aspernatur impedit inventore voluptatibus veniam!
+  </p>
+</div>
+
+    
+    <section class="featured-products container reveal">
+        <div class="products-header">
+            <h2>Featured Products</h2>
+            <div class="product-filters">
+                <a href="#" class="active">All</a>
+                <a href="./404.html">Apparel</a>
+                <a href="./404.html">Bags</a>
+                <a href="./404.html">Nursing</a>
+            </div>
+        </div>
+
+        <div class="products-grid reveal-stagger">
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="Asset/Rectangle-14-24-600x600.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price">$10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="Asset/Rectangle-14-22.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price">$10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="Asset/Rectangle-14-30-420x560.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price">$10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="Asset/Rectangle-14-31-420x560.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price">$10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="Asset/Rectangle-14-33-420x560.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price">$10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="Asset/Rectangle-27-1.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price">$10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="Asset/Rectangle-34-8.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price">$10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="sale-badge">Sale</span>
+                    <img src="Asset/Rectangle-46-1.webp" alt="Pediatric Collector">
+                </div>
+                <div class="product-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="price"><span class="old-price">$15.00</span> $10.00</p>
+                    <p class="desc">Welcome to the largest online store home medical supplies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="promo-banners container">
+        <div class="promo-card">
+            <div class="promo-text">
+                <h3>Pressure Measuring ActivBrils H-110K</h3>
+                <p class="promo-price">$23.50</p>
+                <p class="promo-desc">On the other hand, we denounce with righteous indignation and dislike men.</p>
+                <a href="#" class="shop-btn-mini">
+                    <img src="Asset/cart.webp" alt="Cart" class="btn-icon-mini">
+                    SHOP NOW
+                </a>
+            </div>
+            <div class="promo-img">
+                <img src="Asset/Rectangle-14-32-600x600.webp" alt="Pressure Monitor">
+            </div>
+        </div>
+        <div class="hotline-card">
+            <div class="hotline-text">
+                <h3>Hotline:<br>+1 (729) 334-51-81</h3>
+                <p class="address">2496 Miller Ave undefined Lansing, Illinois 67658 United States</p>
+                <p class="schedule">Mon - Fri: 9:00am - 6:00pm<br>Sat: 9:00am - 4:00pm</p>
+            </div>
+            <div class="hotline-img">
+                <img src="Asset/Rectangle-14-33-420x560.webp" alt="Doctor">
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="cta-banner">
+        <div class="container cta-content">
+            <p class="cta-subtitle">We offer a wide range of medical items.</p>
+            <h2>Providing Students with the Tools to Learn for Over 20 Years!</h2>
+            <a href="./contact.html" class="contact-btn">CONTACT US</a>
+        </div>
+    </section>
+
+    
+    <section class="recent-products container reveal">
+        <div class="products-header">
+            <h2>Recent Products</h2>
+            <div class="product-filters">
+                <a href="./shop.html" class="active">All</a>
+                <a href="./shop.html">Apparel</a>
+                <a href="./shop.html">Bags</a>
+                <a href="./shop.html">Nursing</a>
+            </div>
+        </div>
+
+        <div class="recent-grid reveal-stagger">
+            
+            <div class="recent-card">
+                <div class="recent-img-box">
+                    <img src="Asset/Rectangle-46-1.webp" alt="Product">
+                </div>
+                <div class="recent-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="recent-price">$10.00</p>
+                </div>
+            </div>
+            <div class="recent-card">
+                <div class="recent-img-box">
+                    <img src="Asset/Rectangle-14-22.webp" alt="Product">
+                </div>
+                <div class="recent-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="recent-price">$10.00</p>
+                </div>
+            </div>
+            <div class="recent-card">
+                <div class="recent-img-box">
+                    <img src="Asset/Rectangle-14-30-420x560.webp" alt="Product">
+                </div>
+                <div class="recent-info">
+                    <h4>Cold Laser,...</h4>
+                    <p class="recent-price"><span class="old-price">$15.00</span> $12.50</p>
+                </div>
+            </div>
+            <div class="recent-card">
+                <div class="recent-img-box">
+                    <img src="Asset/Rectangle-14-23.webp" alt="Product">
+                </div>
+                <div class="recent-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="recent-price">$10.00</p>
+                </div>
+            </div>
+            <div class="recent-card">
+                <div class="recent-img-box">
+                    <img src="Asset/Rectangle-14-21.webp" alt="Product">
+                </div>
+                <div class="recent-info">
+                    <h4>Cold Laser,...</h4>
+                    <p class="recent-price"><span class="old-price">$15.00</span> $12.50</p>
+                </div>
+            </div>
+            <div class="recent-card">
+                <div class="recent-img-box">
+                    <img src="Asset/Rectangle-14-24-600x600.webp" alt="Product">
+                </div>
+                <div class="recent-info">
+                    <h4>Pediatric Collectors</h4>
+                    <p class="recent-price">$10.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="main-footer">
+        <div class="container newsletter-box">
+            <div class="newsletter-text">
+                <h3>Newsletter</h3>
+                <p>Register now to get updates on promotions and coupons.</p>
+            </div>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">SUBSCRIBE</button>
+            </div>
+            <div class="social-links">
+                <a href="./404.html"><img src="Asset/YT.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/X.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/FB.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/Messenger.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/INSTA.webp" alt="Social" class="social-icon"></a>
+            </div>
+        </div>
+
+        <div class="container footer-main-content">
+            <div class="footer-col">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="./404.html">Search</a></li>
+                    <li><a href="./404.html">Help</a></li>
+                    <li><a href="./404.html">Information</a></li>
+                    <li><a href="./404.html">Privacy Policy</a></li>
+                    <li><a href="./404.html">Shipping Details</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="./404.html">Our Story</a></li>
+                    <li><a href="./404.html">News</a></li>
+                    <li><a href="./404.html">FAQs</a></li>
+                    <li><a href="./404.html">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>My Account</h4>
+                <ul>
+                    <li><a href="./login.html">Login</a></li>
+                    <li><a href="./signup.html">Register</a></li>
+                    <li><a href="./cart.html">Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="./404.html">Orders</a></li>
+                    <li><a href="./404.html">Addresses</a></li>
+                    <li><a href="./404.html">Personal Info</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container brands-stripe">
+            <img src="Asset/Frame-7.webp" alt="Brand">
+            <img src="Asset/Frame-8.webp" alt="Brand">
+            <img src="Asset/Frame-9.webp" alt="Brand">
+            <img src="Asset/Frame-10.webp" alt="Brand">
+            <img src="Asset/Frame-11.webp" alt="Brand">
+            <img src="Asset/Frame-12.webp" alt="Brand">
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-logo">
+                    <img src="Asset/logo.webp" alt="Stackly Logo">
+                </div>
+                <p class="copyright">&copy; 2026 Stackly. All Rights Reserved. </p>
+                <div class="payment-methods">
+                    <img src="Asset/payment-methods.webp" alt="Payment">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://assets.codepen.io/16327/SplitText3.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

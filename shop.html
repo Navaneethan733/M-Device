@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop - Stackly Medical Equipment</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/webp" href="Asset/favicon.webp" />
+  </head>
+  <body>
+  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-ripple"></div>
+      <div class="preloader-ripple"></div>
+      <img src="Asset/logo.webp" alt="Loading..." class="preloader-logo">
+    </div>
+    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+  </div>
+    
+    <nav class="top-nav">
+      <div class="container">
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+          <li class="dropdown">
+            <a href="index.html" class="dropbtn">Home <span class="arrow-down"></span></a>
+            <ul class="dropdown-content">
+              <li><a href="index.html">Home 1</a></li>
+              <li><a href="index2.html">Home 2</a></li>
+            </ul>
+          </li>
+          <li><a href="shop.html" class="active">Shop</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+        <div class="user-actions">
+          <a href="./login.html" class="login-link">Login</a> or
+          <a href="./signup.html" class="register-link">Register</a>
+          <a href="cart.html" class="cart-link"
+            ><img src="Asset/cart.webp" alt="Cart" /> My Cart:
+            <span class="cart-count">0</span></a
+          >
+        </div>
+      </div>
+    </nav>
+
+    
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html"><img src="Asset/logo.webp" alt="Stackly Logo" /></a>
+        </div>
+
+        <div class="contact-info">
+          <p class="phone-label">Call Us: 9876543210</p>
+          <p class="hours">from 8:00am to 9:00pm (Mon-Sun) FREE by US</p>
+        </div>
+      </div>
+    </header>
+
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="index.html">Home</a> / <span>Shop</span>
+        </div>
+    </div>
+
+    
+    <main class="shop-container container">
+        
+        <aside class="shop-sidebar">
+            <div class="filter-group">
+                <h3>Product Categories</h3>
+                <ul class="filter-list">
+                    <li><a href="#" class="active" data-filter="all">All Products <span>(24)</span></a></li>
+                    <li><a href="#" data-filter="analyzers">Analyzers <span>(8)</span></a></li>
+                    <li><a href="#" data-filter="apparel">Apparel <span>(5)</span></a></li>
+                    <li><a href="#" data-filter="bags">Bags <span>(3)</span></a></li>
+                    <li><a href="#" data-filter="needles">Needles <span>(4)</span></a></li>
+                    <li><a href="#" data-filter="nursing">Nursing <span>(4)</span></a></li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h3>Filter by Price</h3>
+                <div class="price-range">
+                    <input type="range" id="price-range" min="0" max="1000" value="1000">
+                    <div class="price-labels">
+                        <span>$0</span>
+                        <span id="price-max-label">$1000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Product Status</h3>
+                <div class="status-filters">
+                    <label><input type="checkbox" id="filter-instock"> In Stock</label>
+                    <label><input type="checkbox" id="filter-onsale"> On Sale</label>
+                </div>
+            </div>
+
+            <div class="sidebar-promo">
+                <img src="Asset/Rectangle-14-30-420x560.webp" alt="Promo">
+                <div class="promo-overlay">
+                    <h4>Special Offer</h4>
+                    <p>Get 10% Off on Analyzers</p>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+        </aside>
+
+        
+        <section class="shop-main">
+            <div class="shop-toolbar">
+                <p id="shop-results-count">Showing 9 results</p>
+                <div class="sort-options">
+                    <select id="shop-sort">
+                        <option value="default">Default sorting</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="name-asc">Name: A-Z</option></select>
+                </div>
+            </div>
+
+            <div class="shop-grid" id="shop-grid">
+<div class="product-card" data-category="analyzers" data-price="120" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-14-24-600x600.webp" alt="Blood Analyzer Pro"></div><div class="product-info"><h4>Blood Analyzer Pro</h4><p class="price">$120.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="analyzers" data-price="89" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-14-22.webp" alt="Advanced Stethoscope"></div><div class="product-info"><h4>Advanced Stethoscope</h4><p class="price">$89.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="apparel" data-price="15" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-14-30-420x560.webp" alt="Digital Thermometer"></div><div class="product-info"><h4>Digital Thermometer</h4><p class="price">$15.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="apparel" data-price="250" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-14-31-420x560.webp" alt="Ophthalmic Projector"></div><div class="product-info"><h4>Ophthalmic Projector</h4><p class="price">$250.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="bags" data-price="45" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-14-33-420x560.webp" alt="Medical Carry Bag"></div><div class="product-info"><h4>Medical Carry Bag</h4><p class="price">$45.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="needles" data-price="5" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-27-1.webp" alt="Disposable Needle Set"></div><div class="product-info"><h4>Disposable Needle Set</h4><p class="price">$5.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="nursing" data-price="75" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-34-8.webp" alt="Professional Nursing Kit"></div><div class="product-info"><h4>Professional Nursing Kit</h4><p class="price">$75.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="needles" data-price="10" data-sale="true" data-stock="true"><div class="product-image"><span class="sale-badge">Sale</span><img src="Asset/Rectangle-46-1.webp" alt="Syringe Pack"></div><div class="product-info"><h4>Syringe Pack (50 units)</h4><p class="price"><span class="old-price">$15.00</span> $10.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+<div class="product-card" data-category="nursing" data-price="320" data-sale="false" data-stock="true"><div class="product-image"><img src="Asset/Rectangle-14-23.webp" alt="Diagnostic Station Set"></div><div class="product-info"><h4>Diagnostic Station Set</h4><p class="price">$320.00</p><div class="product-actions"><div class="quantity-control"><button type="button" class="qty-btn minus-btn">-</button><input type="number" class="qty-input" value="1" min="1"><button type="button" class="qty-btn plus-btn">+</button></div><button class="add-to-cart">ADD TO CART</button></div></div></div>
+</div>
+<p id="shop-no-results" style="display:none;text-align:center;padding:40px;color:#718096;">No products match your filters. <a href="#" id="clear-filters" style="color:#0061ff;font-weight:600;">Clear filters</a></p>
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="./404.html">2</a>
+                <a href="./404.html">3</a>
+                <a href="./404.html">→</a>
+            </div>
+        </section>
+    </main>
+
+    
+    <footer class="main-footer">
+        <div class="container newsletter-box">
+            <div class="newsletter-text">
+                <h3>Newsletter</h3>
+                <p>Register now to get updates on promotions and coupons.</p>
+            </div>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">SUBSCRIBE</button>
+            </div>
+            <div class="social-links">
+                <a href="./404.html"><img src="Asset/YT.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/X.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/FB.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/Messenger.webp" alt="Social" class="social-icon"></a>
+                <a href="./404.html"><img src="Asset/INSTA.webp" alt="Social" class="social-icon"></a>
+            </div>
+        </div>
+
+        <div class="container footer-main-content">
+            <div class="footer-col">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="./404.html">Search</a></li>
+                    <li><a href="./404.html">Help</a></li>
+                    <li><a href="./404.html">Information</a></li>
+                    <li><a href="./404.html">Privacy Policy</a></li>
+                    <li><a href="./404.html">Shipping Details</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./404.html">Our Story</a></li>
+                    <li><a href="./404.html">News</a></li>
+                    <li><a href="./404.html">FAQs</a></li>
+                    <li><a href="./404.html">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>My Account</h4>
+                <ul>
+                    <li><a href="./login.html">Login</a></li>
+                    <li><a href="./signup.html">Register</a></li>
+                    <li><a href="./cart.html">Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="./404.html">Orders</a></li>
+                    <li><a href="./404.html">Addresses</a></li>
+                    <li><a href="./404.html">Personal Info</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-logo">
+                    <img src="Asset/logo.webp" alt="Stackly Logo">
+                </div>
+                <p class="copyright">&copy; 2026 Stackly. All Rights Reserved. </p>
+                <div class="payment-methods">
+                    <img src="Asset/payment-methods.webp" alt="Payment">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
