@@ -504,21 +504,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.toggle('active');
             mobileMenuToggle.classList.toggle('active');
+            
+            // Close all dropdowns when menu is toggled
+            if (!isActive) {
+                navLinks.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+            }
         });
 
         document.addEventListener('click', (e) => {
             if (!mobileMenuToggle.contains(e.target) && !navLinks.contains(e.target)) {
                 navLinks.classList.remove('active');
                 mobileMenuToggle.classList.remove('active');
+                navLinks.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
             }
         });
 
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuToggle.classList.remove('active');
+            link.addEventListener('click', (e) => {
+                const isMobile = window.innerWidth <= 1024; // Increased threshold for broader tablet support
+                const isDropdownTrigger = link.classList.contains('dropbtn') || link.closest('.dropdown > a');
+                const hasDropdown = link.nextElementSibling && link.nextElementSibling.classList.contains('dropdown-content');
+
+                if (isMobile && hasDropdown) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const dropdown = link.parentElement;
+                    dropdown.classList.toggle('active');
+                    return;
+                }
+
+                // For normal links or sub-menu links
+                if (!link.classList.contains('dropbtn')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    navLinks.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+                }
             });
         });
     }
@@ -650,6 +672,58 @@ document.addEventListener('click', (e) => {
             if (allLink) allLink.classList.add('active');
             applyFilters();
         });
+    }
+
+    // Custom Form Validation logic
+    const forms = document.querySelectorAll('#loginForm, #signupForm');
+    
+    forms.forEach(form => {
+        form.setAttribute('novalidate', true);
+        
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
+            const inputs = form.querySelectorAll('input[required]');
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    showError(input, 'This field is required');
+                } else {
+                    removeError(input);
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                form.classList.add('error-shake');
+                setTimeout(() => form.classList.remove('error-shake'), 500);
+            }
+        });
+        
+        form.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => removeError(input));
+            input.addEventListener('focus', () => removeError(input));
+        });
+    });
+
+    function showError(input, message) {
+        const group = input.parentElement;
+        if (!group.classList.contains('error')) {
+            group.classList.add('error');
+            const popup = document.createElement('div');
+            popup.className = 'error-popup';
+            popup.textContent = message;
+            group.appendChild(popup);
+        }
+    }
+
+    function removeError(input) {
+        const group = input.parentElement;
+        if (group.classList.contains('error')) {
+            group.classList.remove('error');
+            const popup = group.querySelector('.error-popup');
+            if (popup) popup.remove();
+        }
     }
 
     applyFilters();
