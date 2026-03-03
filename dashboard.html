@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Dashboard - Stackly Medical</title>
+    <title>User Dashboard - Stackly Medical Equipment</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="animations.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,26 +14,18 @@
     />
     <link rel="icon" type="image/webp" href="Asset/favicon.webp" />
   </head>
-  <body class="dashboard-body">
-  <div id="preloader">
-    <div class="preloader-inner">
-      <div class="preloader-ripple"></div>
-      <div class="preloader-ripple"></div>
-      <img src="Asset/logo.webp" alt="Loading..." class="preloader-logo">
-    </div>
-    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
-  </div>
-    
+  <body class="dashboard-page">
+    <!-- Top Nav (Standard) -->
     <nav class="top-nav">
       <div class="container">
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul class="nav-links">
           <li class="dropdown">
-            Home <span class="arrow-down"></span>
+            <a href="javascript:void(0)" class="dropbtn">Home <span class="arrow-down"></span></a>
             <ul class="dropdown-content">
               <li><a href="index.html">Home 1</a></li>
               <li><a href="index2.html">Home 2</a></li>
@@ -44,23 +36,29 @@
           <li><a href="about.html">About Us</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li class="mobile-auth-links"><a href="login.html">Login</a></li>
+          <li class="mobile-auth-links"><a href="signup.html">Register</a></li>
         </ul>
         <div class="user-actions">
-          <a href="cart.html" class="cart-link"
-            ><img src="Asset/cart.webp" alt="Cart" /> My Cart:
-            <span class="cart-count">0</span></a
-          >
+          <div class="auth-desktop">
+            <a href="login.html" class="login-link">Login</a> or
+            <a href="signup.html" class="register-link">Register</a>
+          </div>
+          <a href="cart.html" class="cart-link">
+            <img src="Asset/cart.webp" alt="Cart" /> My Cart:
+            <span class="cart-count">0</span>
+          </a>
         </div>
       </div>
     </nav>
 
-    
+    <!-- Main Header (Standard) -->
     <header class="main-header">
       <div class="container">
         <div class="logo">
           <a href="index.html"><img src="Asset/logo.webp" alt="Stackly Logo" /></a>
         </div>
-
         <div class="contact-info">
           <p class="phone-label">Call Us:9876543210</p>
           <p class="hours">from 8:00am to 9:00pm (Mon-Sun) FREE by US</p>
@@ -68,175 +66,190 @@
       </div>
     </header>
 
-    
-    <section class="dashboard-section">
-      <div class="container dashboard-container">
-        
-        <aside class="dashboard-sidebar reveal">
-            <div class="user-profile-summary">
-                <div class="avatar">JD</div>
-                <div class="user-info">
-                    <h3>John Doe</h3>
-                    <p>Member since 2026</p>
-                </div>
-            </div>
-            <ul class="dashboard-nav">
-                <li><a href="#" class="active"><i class="icon">📊</i> Dashboard Preview</a></li>
-                <li><a href="./404.html"><i class="icon">📦</i> My Orders</a></li>
-                <li><a href="./404.html"><i class="icon">🩺</i> Prescriptions</a></li>
-                <li><a href="./404.html"><i class="icon">📍</i> Addresses</a></li>
-                <li><a href="./404.html"><i class="icon">⚙️</i> Account Details</a></li>
-                <li><a href="login.html" class="logout-btn"><i class="icon">🚪</i> Logout</a></li>
-            </ul>
-        </aside>
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="index.html">Home</a> / <span>Dashboard</span>
+        </div>
+    </div>
 
-        
-        <main class="dashboard-content reveal-stagger active">
-            <header class="dashboard-header">
-                <h2>Welcome back, John!</h2>
-                <p>Here is an overview of your recent account activity.</p>
-            </header>
-
-            
-            <div class="dashboard-metrics">
-                <div class="metric-card">
-                    <div class="metric-icon blue-bg">🛍️</div>
-                    <div class="metric-data">
-                        <h3>12</h3>
-                        <p>Total Orders</p>
+    <!-- Dashboard Main -->
+    <main class="dashboard-section">
+        <div class="container dashboard-container">
+            <!-- Sidebar Navigation -->
+            <aside class="dashboard-sidebar">
+                <div class="user-profile-brief">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <h3>John Doe</h3>
+                        <p>john.doe@example.com</p>
                     </div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-icon green-bg">💊</div>
-                    <div class="metric-data">
-                        <h3>3</h3>
-                        <p>Active Prescriptions</p>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon orange-bg">⏱️</div>
-                    <div class="metric-data">
-                        <h3>1</h3>
-                        <p>Pending Delivery</p>
-                    </div>
-                </div>
-            </div>
+                <ul class="dashboard-nav">
+                    <li><a href="#" class="active"><span class="nav-icon">📊</span> Overview</a></li>
+                    <li><a href="#"><span class="nav-icon">📦</span> My Orders</a></li>
+                    <li><a href="#"><span class="nav-icon">📄</span> Prescriptions</a></li>
+                    <li><a href="#"><span class="nav-icon">❤️</span> Health Profile</a></li>
+                    <li><a href="#"><span class="nav-icon">⚙️</span> Settings</a></li>
+                    <li><a href="#" class="logout-btn"><span class="nav-icon">🚪</span> Logout</a></li>
+                </ul>
+            </aside>
 
-            
-            <div class="dashboard-panel">
-                <div class="panel-header">
-                    <h3>Recent Orders</h3>
-                    <a href="./404.html" class="view-all">View All</a>
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Welcome Banner -->
+                <div class="dashboard-header">
+                    <h2>Welcome back, John!</h2>
+                    <p>Here's what's happening with your account today.</p>
                 </div>
-                <div class="table-responsive">
-                    <table class="dashboard-table">
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Total</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#ORD-2026-901</td>
-                                <td>Oct 24, 2026</td>
-                                <td><span class="status-badge shipped">Shipped</span></td>
-                                <td>$145.00</td>
-                                <td><a href="./404.html" class="action-link">Track</a></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-2026-885</td>
-                                <td>Oct 12, 2026</td>
-                                <td><span class="status-badge delivered">Delivered</span></td>
-                                <td>$89.50</td>
-                                <td><a href="./404.html" class="action-link">View</a></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-2026-742</td>
-                                <td>Sep 05, 2026</td>
-                                <td><span class="status-badge delivered">Delivered</span></td>
-                                <td>$320.00</td>
-                                <td><a href="./404.html" class="action-link">View</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-            
-            <div class="dashboard-panel">
-                <div class="panel-header">
-                    <h3>Upcoming Appointments</h3>
-                    <a href="./404.html" class="view-all">Schedule New</a>
-                </div>
-                <div class="appointments-list">
-                    <div class="appointment-card">
-                        <div class="apt-date">
-                            <span class="day">15</span>
-                            <span class="month">Nov</span>
-                        </div>
-                        <div class="apt-details">
-                            <h4>Dr. Sarah Jenkins</h4>
-                            <p>Cardiology Consultation &bull; 10:00 AM</p>
-                        </div>
-                        <div class="apt-action">
-                            <button class="apt-btn">Reschedule</button>
+                <!-- Stats Grid -->
+                <div class="dashboard-metrics">
+                    <div class="metric-card">
+                        <div class="metric-icon orders">🛒</div>
+                        <div class="metric-data">
+                            <h4>Total Orders</h4>
+                            <span class="value">12</span>
                         </div>
                     </div>
-                    <div class="appointment-card">
-                        <div class="apt-date">
-                            <span class="day">22</span>
-                            <span class="month">Nov</span>
+                    <div class="metric-card">
+                        <div class="metric-icon points">⭐</div>
+                        <div class="metric-data">
+                            <h4>Loyalty Points</h4>
+                            <span class="value">450</span>
                         </div>
-                        <div class="apt-details">
-                            <h4>Dr. Michael Chen</h4>
-                            <p>Routine Checkup &bull; 02:30 PM</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon active">💊</div>
+                        <div class="metric-data">
+                            <h4>Active Prescriptions</h4>
+                            <span class="value">2</span>
                         </div>
-                        <div class="apt-action">
-                            <button class="apt-btn">Reschedule</button>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon health">👨‍⚕️</div>
+                        <div class="metric-data">
+                            <h4>Health Score</h4>
+                            <span class="value">85/100</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            
-            <div class="dashboard-quick-actions">
-                <a href="shop.html" class="quick-action-card">
-                    <div class="qa-icon">🛒</div>
-                    <h4>Shop New Arrivals</h4>
-                    <p>Browse the latest medical equipment.</p>
-                </a>
-                <a href="./404.html" class="quick-action-card">
-                    <div class="qa-icon">📄</div>
-                    <h4>Upload Prescription</h4>
-                    <p>Fast track your medical orders.</p>
-                </a>
-            </div>
-        </main>
-      </div>
-    </section>
+                <div class="dashboard-grid">
+                    <!-- Recent Orders Table -->
+                    <div class="dashboard-panel">
+                        <div class="panel-header">
+                            <h3>Recent Orders</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Product</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#SK-9823</td>
+                                        <td>Oct 24, 2023</td>
+                                        <td>Digital Thermometer</td>
+                                        <td>$15.00</td>
+                                        <td><span class="status-badge success">Delivered</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#SK-9751</td>
+                                        <td>Oct 12, 2023</td>
+                                        <td>Blood Analyzer Pro</td>
+                                        <td>$120.00</td>
+                                        <td><span class="status-badge processing">Processing</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#SK-9642</td>
+                                        <td>Sep 28, 2023</td>
+                                        <td>Advanced Stethoscope</td>
+                                        <td>$89.00</td>
+                                        <td><span class="status-badge success">Delivered</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-    
-    <footer class="site-footer">
+                    <!-- Health Snapshot -->
+                    <div class="dashboard-panel">
+                        <div class="panel-header">
+                            <h3>Health Snapshot</h3>
+                            <button class="edit-btn">Edit</button>
+                        </div>
+                        <div class="health-metrics">
+                            <div class="health-item">
+                                <span class="label">BMI Index</span>
+                                <div class="health-bar-container">
+                                    <div class="health-bar" style="width: 65%;"></div>
+                                </div>
+                                <span class="stat">22.5 (Normal)</span>
+                            </div>
+                            <div class="health-item">
+                                <span class="label">Blood Pressure</span>
+                                <span class="stat">120/80 mmHg</span>
+                            </div>
+                            <div class="health-item">
+                                <span class="label">Last Checkup</span>
+                                <span class="stat">Oct 05, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="dashboard-panel full-width">
+                        <div class="panel-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="dashboard-quick-actions">
+                            <a href="#" class="quick-action-card">
+                                <div class="qa-icon">📤</div>
+                                <h4>Upload Prescription</h4>
+                                <p>Get your medicines faster</p>
+                            </a>
+                            <a href="#" class="quick-action-card">
+                                <div class="qa-icon">🔄</div>
+                                <h4>Refill Request</h4>
+                                <p>Automatic medicine refill</p>
+                            </a>
+                            <a href="#" class="quick-action-card">
+                                <div class="qa-icon">📍</div>
+                                <h4>Manage Address</h4>
+                                <p>Set your delivery location</p>
+                            </a>
+                            <a href="#" class="quick-action-card">
+                                <div class="qa-icon">💬</div>
+                                <h4>Consult Doctor</h4>
+                                <p>Book an online session</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Standard) -->
+    <footer class="main-footer">
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-logo">
                     <img src="Asset/logo.webp" alt="Stackly Logo">
                 </div>
                 <p class="copyright">&copy; 2026 Stackly. All Rights Reserved. </p>
-                <div class="payment-methods">
-                    <img src="Asset/payment-methods.webp" alt="Payment">
-                </div>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/SplitText.min.js"></script>
-<script src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

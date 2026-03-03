@@ -33,7 +33,7 @@
                 </button>
         <ul class="nav-links">
           <li class="dropdown">
-            <a href="index.html" class="dropbtn">Home <span class="arrow-down"></span></a>
+            <a href="javascript:void(0)" class="dropbtn">Home <span class="arrow-down"></span></a>
             <ul class="dropdown-content">
               <li><a href="index.html">Home 1</a></li>
               <li><a href="index2.html">Home 2</a></li>
@@ -44,10 +44,14 @@
           <li><a href="about.html">About Us</a></li>
           <li><a href="contact.html" class="active">Contact</a></li>
           <li><a href="dashboard.html">Dashboard</a></li>
+          <li class="mobile-auth-links"><a href="login.html">Login</a></li>
+          <li class="mobile-auth-links"><a href="signup.html">Register</a></li>
         </ul>
         <div class="user-actions">
-          <a href="./login.html" class="login-link">Login</a> or
-          <a href="./signup.html" class="register-link">Register</a>
+          <div class="auth-desktop">
+            <a href="login.html" class="login-link">Login</a> or
+            <a href="signup.html" class="register-link">Register</a>
+          </div>
           <a href="cart.html" class="cart-link"
             ><img src="Asset/cart.webp" alt="Cart" /> My Cart:
             <span class="cart-count">0</span></a
@@ -151,6 +155,60 @@
                             </div>
                             <button type="submit" class="submit-btn">SEND MESSAGE</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="featured-products container reveal">
+            <div class="products-header">
+                <h2>Suggested Products</h2>
+            </div>
+
+            <div class="products-grid reveal-stagger">
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="Asset/Rectangle-14-24-600x600.webp" alt="Blood Analyzer">
+                    </div>
+                    <div class="product-info">
+                        <h4>Blood Analyzer Pro</h4>
+                        <p class="price">$120.00</p>
+                        <p class="desc">High-precision diagnostic equipment for professional use.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="Asset/Rectangle-14-22.webp" alt="Stethoscope">
+                    </div>
+                    <div class="product-info">
+                        <h4>Advanced Stethoscope</h4>
+                        <p class="price">$89.00</p>
+                        <p class="desc">Premium acoustic performance for accurate diagnostics.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="Asset/Rectangle-14-30-420x560.webp" alt="Thermometer">
+                    </div>
+                    <div class="product-info">
+                        <h4>Digital Thermometer</h4>
+                        <p class="price">$15.00</p>
+                        <p class="desc">Fast and accurate temperature readings for all ages.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="Asset/Rectangle-14-31-420x560.webp" alt="Projector">
+                    </div>
+                    <div class="product-info">
+                        <h4>Ophthalmic Projector</h4>
+                        <p class="price">$250.00</p>
+                        <p class="desc">Professional visual acuity testing solution.</p>
                     </div>
                 </div>
             </div>

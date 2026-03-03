@@ -24,163 +24,59 @@
     <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
   </div>
     
-    <nav class="top-nav">
-      <div class="container">
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-        <ul class="nav-links">
-          <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Home <span class="arrow-down"></span></a>
-            <ul class="dropdown-content">
-              <li><a href="index.html">Home 1</a></li>
-              <li><a href="index2.html">Home 2</a></li>
-            </ul>
-          </li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="service.html">Services</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="dashboard.html">Dashboard</a></li>
-        </ul>
-        <div class="user-actions">
-          <a href="login.html" class="login-link">Login</a> or
-          <a href="signup.html" class="register-link">Register</a>
-          <a href="cart.html" class="cart-link"
-            ><img src="Asset/cart.webp" alt="Cart" /> My Cart:
-            <span class="cart-count">0</span></a
-          >
-        </div>
+  <section class="split-login-container">
+    <div class="login-left">
+      <div class="return-home-container">
+        <a href="index.html" class="return-home-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Return Home</span>
+        </a>
       </div>
-    </nav>
-
-    
-    <header class="main-header">
-      <div class="container">
-        <div class="logo">
-          <a href="index.html"><img src="Asset/logo.webp" alt="Stackly Logo" /></a>
-        </div>
-
-        <div class="contact-info">
-          <p class="phone-label">Call Us:9876543210</p>
-          <p class="hours">from 8:00am to 9:00pm (Mon-Sun) FREE by US</p>
-        </div>
+      <div class="login-header">
+        <a href="index.html" class="login-logo">
+          <img src="Asset/logo.webp" alt="Stackly Logo" />
+        </a>
       </div>
-    </header>
-
-    
-    <section class="auth-section">
-      <div class="container auth-container-wrapper">
-        <div class="auth-form-container reveal">
-          <h2>Welcome Back</h2>
-          <p class="auth-subtitle">Please enter your details to sign in.</p>
-          <form id="loginForm">
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" placeholder="Enter your email" required />
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" placeholder="Enter your password" required />
-            </div>
-            <div class="form-actions">
-              <label class="remember-me">
-                <input type="checkbox" /> <span>Remember me</span>
-              </label>
-              <a href="#" class="forgot-password">Forgot Password?</a>
-            </div>
-            <button type="submit" class="submit-btn auth-btn">Sign In</button>
-          </form>
-          <p class="auth-switch">Don't have an account? <a href="signup.html">Sign Up</a></p>
-        </div>
+      
+      <div class="login-content reveal">
+        <h1>Welcome back</h1>
+        <p class="auth-subtitle">Please enter your details</p>
+        
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="Enter your email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required />
+          </div>
+          
+          <div class="form-actions">
+            <label class="remember-me">
+              <input type="checkbox" /> <span>Remember for 30 days</span>
+            </label>
+            <a href="#" class="forgot-password">Forgot password</a>
+          </div>
+          
+          <button type="submit" class="submit-btn auth-btn primary-auth-btn">Sign in</button>
+          <button type="button" class="google-btn">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+            Sign in with Google
+          </button>
+        </form>
+        
+        <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up</a></p>
       </div>
-    </section>
-
+    </div>
     
-    <footer class="site-footer">
-        <div class="container footer-top">
-            <div class="footer-contact">
-                <i class="phone-icon">📞</i>
-                <div class="contact-text">
-                    <span class="label">Call us 24/7</span>
-                    <span class="number">9876543210</span>
-                </div>
-            </div>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Your email address">
-                <button type="submit">SUBSCRIBE</button>
-            </div>
-            <div class="social-links">
-                <a href="./404.html"><img src="Asset/YT.webp" alt="Social" class="social-icon"></a>
-                <a href="./404.html"><img src="Asset/X.webp" alt="Social" class="social-icon"></a>
-                <a href="./404.html"><img src="Asset/FB.webp" alt="Social" class="social-icon"></a>
-                <a href="./404.html"><img src="Asset/Messenger.webp" alt="Social" class="social-icon"></a>
-                <a href="./404.html"><img src="Asset/INSTA.webp" alt="Social" class="social-icon"></a>
-            </div>
-        </div>
-
-        <div class="container footer-main-content">
-            <div class="footer-col">
-                <h4>Help</h4>
-                <ul>
-                    <li><a href="./404.html">Search</a></li>
-                    <li><a href="./404.html">Help</a></li>
-                    <li><a href="./404.html">Information</a></li>
-                    <li><a href="./404.html">Privacy Policy</a></li>
-                    <li><a href="./404.html">Shipping Details</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Information</h4>
-                <ul>
-                    <li><a href="./404.html">Our Story</a></li>
-                    <li><a href="./404.html">News</a></li>
-                    <li><a href="./404.html">FAQs</a></li>
-                    <li><a href="./404.html">Contacts</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>My Account</h4>
-                <ul>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="signup.html">Register</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Customer Service</h4>
-                <ul>
-                    <li><a href="./404.html">Orders</a></li>
-                    <li><a href="./404.html">Addresses</a></li>
-                    <li><a href="./404.html">Personal Info</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="container brands-stripe">
-            <img src="Asset/Frame-7.webp" alt="Brand">
-            <img src="Asset/Frame-8.webp" alt="Brand">
-            <img src="Asset/Frame-9.webp" alt="Brand">
-            <img src="Asset/Frame-10.webp" alt="Brand">
-            <img src="Asset/Frame-11.webp" alt="Brand">
-            <img src="Asset/Frame-12.webp" alt="Brand">
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="footer-logo">
-                    <img src="Asset/logo.webp" alt="Stackly Logo">
-                </div>
-                <p class="copyright">&copy; 2026 Stackly. All Rights Reserved. </p>
-                <div class="payment-methods">
-                    <img src="Asset/payment-methods.webp" alt="Payment">
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div class="login-right" style="background-image: url('Asset/login-vibe.png');">
+      <!-- Illustration background via CSS/Inline Style -->
+    </div>
+  </section>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
