@@ -221,6 +221,8 @@ html, body {
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
     transition: 0.4s ease-in-out;
     z-index: 1000;
+    overflow-y: auto;
+    max-height: 100vh;
   }
 
   .nav-links.active {
@@ -282,6 +284,13 @@ html, body {
 .dropdown {
   position: relative;
   display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .dropdown {
+    display: block;
+    width: 100%;
+  }
 }
 
 .dropbtn {
@@ -353,8 +362,9 @@ html, body {
   .dropdown.active .dropdown-content {
     display: block;
     opacity: 1;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    visibility: visible;
   }
 }
 

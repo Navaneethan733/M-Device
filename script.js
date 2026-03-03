@@ -523,14 +523,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', (e) => {
-                const isMobile = window.innerWidth <= 1024; // Increased threshold for broader tablet support
-                const isDropdownTrigger = link.classList.contains('dropbtn') || link.closest('.dropdown > a');
+                const isMobile = window.innerWidth <= 768; 
                 const hasDropdown = link.nextElementSibling && link.nextElementSibling.classList.contains('dropdown-content');
 
                 if (isMobile && hasDropdown) {
                     e.preventDefault();
                     e.stopPropagation();
                     const dropdown = link.parentElement;
+                    
+                    // Close other dropdowns
+                    navLinks.querySelectorAll('.dropdown').forEach(d => {
+                        if (d !== dropdown) d.classList.remove('active');
+                    });
+                    
                     dropdown.classList.toggle('active');
                     return;
                 }
