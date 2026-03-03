@@ -7,7 +7,8 @@ window.addEventListener('load', () => {
     }, 600);
 });
 
-    // Initialize Lenis
+try {
+    // Initialize Lenis (only on pages that load the Lenis CDN)
     const lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -21,11 +22,15 @@ window.addEventListener('load', () => {
     requestAnimationFrame(raf);
 
     // Sync Lenis with ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
+    if (typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
+    }
+    if (typeof gsap !== 'undefined') {
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+    }
 
     // Scroll Progress Bar
     const progressBar = document.querySelector('.scroll-progress');
@@ -33,6 +38,9 @@ window.addEventListener('load', () => {
         const progress = (scroll / limit) * 100;
         if (progressBar) progressBar.style.width = progress + '%';
     });
+} catch(e) {
+    // Lenis or GSAP not available on this page, skip smooth scroll setup
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -383,39 +391,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.querySelectorAll('.quantity-control').forEach(control => {
-        const minusBtn = control.querySelector('.minus-btn');
-        const plusBtn = control.querySelector('.plus-btn');
-        const input = control.querySelector('.qty-input');
+    // Quantity controls: use event delegation so it works even after filter/sort
+    document.addEventListener('click', (e) => {
+        const minusBtn = e.target.closest('.minus-btn');
+        const plusBtn  = e.target.closest('.plus-btn');
 
-        if (minusBtn && plusBtn && input) {
-            minusBtn.addEventListener('click', () => {
-                let currentValue = parseInt(input.value) || 1;
-                if (currentValue > 1) {
-                    input.value = currentValue - 1;
-                    if (control.closest('.cart-row')) {
-                        updateCartItemQuantity(control.closest('.cart-row'), input.value);
-                    }
+        if (minusBtn) {
+            const control = minusBtn.closest('.quantity-control');
+            if (!control) return;
+            const input = control.querySelector('.qty-input');
+            if (!input) return;
+            let currentValue = parseInt(input.value) || 1;
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+                const cartRow = control.closest('.cart-row');
+                if (cartRow && typeof updateCartItemQuantity === 'function') {
+                    updateCartItemQuantity(cartRow, input.value);
                 }
-            });
+            }
+        }
 
-            plusBtn.addEventListener('click', () => {
-                let currentValue = parseInt(input.value) || 1;
-                input.value = currentValue + 1;
-                if (control.closest('.cart-row')) {
-                    updateCartItemQuantity(control.closest('.cart-row'), input.value);
-                }
-            });
+        if (plusBtn) {
+            const control = plusBtn.closest('.quantity-control');
+            if (!control) return;
+            const input = control.querySelector('.qty-input');
+            if (!input) return;
+            let currentValue = parseInt(input.value) || 1;
+            input.value = currentValue + 1;
+            const cartRow = control.closest('.cart-row');
+            if (cartRow && typeof updateCartItemQuantity === 'function') {
+                updateCartItemQuantity(cartRow, input.value);
+            }
+        }
+    });
 
-            input.addEventListener('change', () => {
-                let currentValue = parseInt(input.value);
-                if (isNaN(currentValue) || currentValue < 1) {
-                    input.value = 1;
-                }
-                if (control.closest('.cart-row')) {
-                    updateCartItemQuantity(control.closest('.cart-row'), input.value);
-                }
-            });
+    // Keep input validation on change
+    document.addEventListener('change', (e) => {
+        if (e.target.classList.contains('qty-input')) {
+            let val = parseInt(e.target.value);
+            if (isNaN(val) || val < 1) {
+                e.target.value = 1;
+            }
+            const cartRow = e.target.closest('.cart-row');
+            if (cartRow && typeof updateCartItemQuantity === 'function') {
+                updateCartItemQuantity(cartRow, e.target.value);
+            }
         }
     });
 
@@ -476,15 +496,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                     </td>
-                    <td class="product-price">$${item.price.toFixed(2)}</td>
-                    <td class="product-quantity">
+                    <td class="product-price" data-label="Price">$${item.price.toFixed(2)}</td>
+                    <td class="product-quantity" data-label="Quantity">
                         <div class="quantity-control cart-qty">
                             <button type="button" class="qty-btn minus-btn">-</button>
                             <input type="number" class="qty-input" value="${item.quantity}" min="1">
                             <button type="button" class="qty-btn plus-btn">+</button>
                         </div>
                     </td>
-                    <td class="product-subtotal">$${lineSubtotal.toFixed(2)}</td>
+                    <td class="product-subtotal" data-label="Subtotal">$${lineSubtotal.toFixed(2)}</td>
                 `;
                 tbody.appendChild(tr);
             });
