@@ -7,6 +7,33 @@ window.addEventListener('load', () => {
     }, 600);
 });
 
+    // Initialize Lenis
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Sync Lenis with ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Scroll Progress Bar
+    const progressBar = document.querySelector('.scroll-progress');
+    lenis.on('scroll', ({ scroll, limit }) => {
+        const progress = (scroll / limit) * 100;
+        if (progressBar) progressBar.style.width = progress + '%';
+    });
+
 document.addEventListener('DOMContentLoaded', () => {
 
     document.body.classList.add('js-ready');
@@ -48,34 +75,52 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < 0) index = totalSlides - 1;
         if (index >= totalSlides) index = 0;
         
+        const prevSlide = currentSlide;
         currentSlide = index;
 
         gsap.to(slider, {
             xPercent: -100 * currentSlide,
-            duration: 1,
-            ease: "power2.inOut"
+            duration: 1.2,
+            ease: "power3.inOut"
         });
 
         dots.forEach(dot => dot.classList.remove('active'));
         dots[currentSlide].classList.add('active');
 
-        const activeSlideText = slides[currentSlide].querySelector('.animate-me');
-        if (activeSlideText) {
-            gsap.set(activeSlideText, { opacity: 1 });
+        // Reset previous slide elements
+        const prevActiveText = slides[prevSlide].querySelector('.animate-me');
+        if (prevActiveText) gsap.set(prevActiveText, { opacity: 0, y: 30 });
 
-            const words = activeSlideText.querySelectorAll('div'); // fixed selector
-            if (words.length > 0) {
-                gsap.fromTo(words, {
-                    opacity: 0,
-                    y: 20
-                }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power2.out",
-                    stagger: 0.05
-                });
-            }
+        // Animate current slide
+        const activeSlideText = slides[currentSlide].querySelector('.animate-me');
+        const activeSlideImg = slides[currentSlide].querySelector('.hero-image');
+        
+        if (activeSlideText) {
+            gsap.fromTo(activeSlideText, {
+                opacity: 0,
+                y: 50
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.5,
+                ease: "power3.out"
+            });
+        }
+
+        if (activeSlideImg) {
+            gsap.fromTo(activeSlideImg, {
+                opacity: 0,
+                scale: 0.8,
+                x: 50
+            }, {
+                opacity: 1,
+                scale: 1,
+                x: 0,
+                duration: 1.2,
+                delay: 0.3,
+                ease: "power2.out"
+            });
         }
     }
 
@@ -106,16 +151,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealConfigs = [
         { trigger: ".features", target: ".feature-item", y: 30, stagger: 0.2 },
         { trigger: ".featured", target: ".featured-header, .card", y: 40, stagger: 0.1 },
-        { trigger: ".featured-products", target: ".products-header, .product-card", y: 40, stagger: 0.1 },
-        { trigger: ".promo-banners", target: ".promo-card, .hotline-card", y: 40, stagger: 0.2 },
-        { trigger: ".cta-banner", target: ".cta-content h2, .contact-btn", y: 30, stagger: 0.2 },
-        { trigger: ".recent-products", target: ".products-header, .recent-card", y: 30, stagger: 0.1 },
+        { trigger: ".featured-products", target: ".products-header, .product-card", y: 40, stagger: 0.1, ease: "back.out(1.7)", filter: "blur(10px)", opacity: 0 },
+        { trigger: ".promo-banners", target: ".promo-card, .hotline-card", x: 60, opacity: 0, stagger: 0.2, filter: "blur(5px)" },
+        { trigger: ".cta-banner", target: ".cta-content h2, .contact-btn", y: 30, stagger: 0.2, scale: 0.95, opacity: 0 },
+        { trigger: ".recent-products", target: ".products-header, .recent-card", y: 30, stagger: 0.1, opacity: 0 },
+        { trigger: ".medical-solutions", target: ".ms-title, .ms-description", y: 30, opacity: 0, stagger: 0.2 },
         { trigger: ".why-us", target: ".drawing-item", y: 40, stagger: 0.3 },
         { trigger: ".isometric-section", target: ".iso-card", y: 60, stagger: 0.2 },
         { trigger: ".timeline-container", target: ".timeline-item", y: 40, stagger: 0.5 },
         { trigger: ".integration-container", target: ".integration-container", y: 0, opacity: 1 },
         { trigger: ".reveal", target: ".reveal", y: 30, stagger: 0 },
-        { trigger: ".reveal-stagger", target: ".reveal-stagger > *", y: 20, stagger: 0.1 }
+        { trigger: ".reveal-zoom", target: ".reveal-zoom", scale: 0.9, y: 20 },
+        { trigger: ".reveal-left", target: ".reveal-left", x: -40 },
+        { trigger: ".reveal-stagger", target: ".reveal-stagger > *", y: 20, stagger: 0.1 },
+        { 
+            trigger: ".medical-solutions", 
+            target: ".popup-element", 
+            scale: 0.5, 
+            y: 50, 
+            opacity: 0, 
+            stagger: 0.15, 
+            ease: "elastic.out(1, 0.7)",
+            duration: 1.2
+        }
     ];
 
     revealConfigs.forEach(config => {
@@ -133,22 +191,36 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targets.length > 0) {
                 targets.forEach(t => t.dataset.animated = "true");
                 
-                gsap.to(targets, {
+                const fromProps = {
+                    opacity: 0,
+                    y: config.y !== undefined ? config.y : 0,
+                    x: config.x !== undefined ? config.x : 0,
+                    scale: config.scale !== undefined ? config.scale : 1,
+                    filter: config.filter || "none"
+                };
+
+                const toProps = {
                     scrollTrigger: {
                         trigger: triggerEl,
                         start: "top 85%",
                         toggleActions: "play none none none"
                     },
-                    x: 0,
-                    y: 0,
                     opacity: 1,
+                    y: 0,
+                    x: 0,
+                    scale: 1,
+                    filter: "none",
                     duration: 1,
                     stagger: config.stagger || 0,
-                    ease: "power2.out",
+                    ease: config.ease || "power2.out",
                     onComplete: () => {
                         triggerEl.classList.add('active');
+                        // Clear GSAP styles to let CSS hovers work normally
+                        gsap.set(targets, { clearProps: "transform,filter" });
                     }
-                });
+                };
+
+                gsap.fromTo(targets, fromProps, toProps);
             }
         });
     });

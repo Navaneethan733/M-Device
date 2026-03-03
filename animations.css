@@ -1,13 +1,27 @@
-/* CSS Reveal Animations — gated behind js-ready so content is always visible without JS */
-body.js-ready .reveal {
+body.js-ready .reveal, 
+body.js-ready .reveal-zoom,
+body.js-ready .reveal-left {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: transform, opacity;
 }
 
-body.js-ready .reveal.active {
+body.js-ready .reveal {
+    transform: translateY(40px);
+}
+
+body.js-ready .reveal-zoom {
+    transform: scale(0.9) translateY(20px);
+}
+
+body.js-ready .reveal-left {
+    transform: translateX(-40px);
+}
+
+body.js-ready .reveal.active,
+body.js-ready .reveal-zoom.active,
+body.js-ready .reveal-left.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(0) scale(1);
 }
 
 /* Staggered children */
@@ -129,4 +143,37 @@ body.js-ready .reveal-stagger.active > * {
 .reveal.active .draw-path,
 .reveal-stagger.active .draw-path {
     stroke-dashoffset: 0 !important;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.floating-img {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Premium Hover Effects */
+.hover-lift {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px) !important;
+}
+
+.hover-glow {
+    transition: all 0.4s ease !important;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 20px 40px rgba(0, 97, 255, 0.15) !important;
+    border-color: rgba(0, 97, 255, 0.3) !important;
+}
+
+/* Hero Zoom Effect */
+.hero-slide {
+    overflow: hidden;
 }

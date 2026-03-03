@@ -12,8 +12,21 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/webp" href="Asset/favicon.webp" />
+    <style>
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #6366f1, #0061ff);
+        z-index: 10001;
+        transition: width 0.1s ease;
+      }
+    </style>
   </head>
   <body>
+    <div class="scroll-progress"></div>
   <div id="preloader">
     <div class="preloader-inner">
       <div class="preloader-ripple"></div>
@@ -193,7 +206,7 @@
 
         <div class="featured-grid reveal-stagger">
             
-            <div class="card card-large">
+            <div class="card card-large reveal-zoom hover-lift hover-glow">
                 <a href="./shop.html"><div class="card-content">
                     <h3>H-110<br>Analyzer Dirui<br>Semiautomatic</h3>
                     <button class="arrow-btn">→</button>
@@ -202,7 +215,7 @@
             </div>
 
             
-            <div class="card card-tall">
+            <div class="card card-tall reveal-zoom hover-lift hover-glow" style="transition-delay: 0.2s;">
                 <a href="./shop.html"><div class="card-content">
                     <h3>H-110<br>Analyzer Dirui<br>Semiautomatic</h3>
                     <button class="arrow-btn">→</button>
@@ -211,7 +224,7 @@
             </div>
 
             
-            <div class="card">
+            <div class="card reveal-zoom hover-lift hover-glow" style="transition-delay: 0.3s;">
                 <a href="./shop.html"><div class="card-content">
                     <h3>ACP Sign<br>Projector - 700<br>Unicos</h3>
                     <button class="arrow-btn">→</button>
@@ -220,7 +233,7 @@
             </div>
 
             
-            <div class="card dark">
+            <div class="card dark reveal-zoom hover-lift hover-glow" style="transition-delay: 0.4s;">
                 <a href="./shop.html"><div class="card-content">
                     <h3>Medical Disposable<br>Needles</h3>
                     <button class="arrow-btn">→</button>
@@ -229,7 +242,7 @@
             </div>
 
             
-            <div class="card blue">
+            <div class="card blue reveal-zoom hover-lift hover-glow" style="transition-delay: 0.5s;">
                 <a href="./shop.html"><div class="card-content">
                     <h3>Clothing Sets For<br>Surgeons</h3>
                     <button class="arrow-btn">→</button>
@@ -238,7 +251,7 @@
             </div>
 
             
-            <div class="card">
+            <div class="card reveal-zoom hover-lift hover-glow" style="transition-delay: 0.6s;">
                 <a href="./shop.html"><div class="card-content">
                     <h3>ACP Sign<br>Projector - 700<br>Unicos</h3>
                     <button class="arrow-btn">→</button>
@@ -248,14 +261,59 @@
         </div>
     </section>
 
-    <div class="integration-container">
-  <div class="animate-me" aria-hidden="true">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius id magni aut, voluptatibus consequuntur minima nemo harum commodi minus unde accusamus veritatis voluptatem. Aspernatur impedit inventore voluptatibus veniam!
-  </div>
-  <p class="sr-only">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius id magni aut, voluptatibus consequuntur minima nemo harum commodi minus unde accusamus veritatis voluptatem. Aspernatur impedit inventore voluptatibus veniam!
-  </p>
-</div>
+    <section class="medical-solutions container">
+        <div class="ms-content reveal-left">
+            <span class="ms-badge">MEDICAL SOLUTIONS</span>
+            <h2 class="ms-title">Advanced Technology For Precision Healthcare</h2>
+            <p class="ms-description">Empowering medical professionals with state-of-the-art diagnostic tools and surgical instruments for better patient outcomes.</p>
+            
+            <div class="ms-action-row">
+                <div class="ms-mini-card popup-element">
+                    <img src="Asset/medical_team.png" alt="Medical Team">
+                    <div class="ms-stat">
+                        <span class="stat-value">98%</span>
+                        <span class="stat-label">Accuracy Rate</span>
+                    </div>
+                </div>
+                <div class="ms-mini-card popup-element" style="transition-delay: 0.1s;">
+                    <div class="ms-stat-box">
+                        <span class="stat-number">$468</span>
+                        <span class="stat-trend">+4.2%</span>
+                    </div>
+                    <p class="stat-sub">Consultation Value Growth</p>
+                </div>
+            </div>
+
+            <a href="shop.html" class="ms-button hover-glow popup-element" style="transition-delay: 0.2s;">
+                EXPLORE SOLUTIONS
+                <span class="ms-btn-icon">→</span>
+            </a>
+        </div>
+
+        <div class="ms-visual reveal">
+            <div class="ms-main-img-box">
+                <img src="Asset/doctor_premium.png" alt="Doctor" class="ms-doctor-img floating-img">
+                
+                <div class="ms-goals-card popup-element" style="transition-delay: 0.3s;">
+                    <h3>Clinical Goals</h3>
+                    <div class="goal-item">
+                        <div class="goal-icon marketing">📢</div>
+                        <div class="goal-info">
+                            <span class="goal-pct">64%</span>
+                            <span class="goal-name">Patient Reach</span>
+                        </div>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-icon sms">✉️</div>
+                        <div class="goal-info">
+                            <span class="goal-pct">94%</span>
+                            <span class="goal-name">Service Efficiency</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
     <section class="featured-products container reveal">
@@ -271,7 +329,7 @@
 
         <div class="products-grid reveal-stagger">
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <img src="Asset/Rectangle-14-24-600x600.webp" alt="Pediatric Collector">
                 </div>
@@ -282,7 +340,7 @@
                 </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <img src="Asset/Rectangle-14-22.webp" alt="Pediatric Collector">
                 </div>
@@ -293,7 +351,7 @@
                 </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <img src="Asset/Rectangle-14-30-420x560.webp" alt="Pediatric Collector">
                 </div>
@@ -304,7 +362,7 @@
                 </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <img src="Asset/Rectangle-14-31-420x560.webp" alt="Pediatric Collector">
                 </div>
@@ -315,7 +373,7 @@
                 </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <img src="Asset/Rectangle-14-33-420x560.webp" alt="Pediatric Collector">
                 </div>
@@ -326,7 +384,7 @@
                 </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <img src="Asset/Rectangle-27-1.webp" alt="Pediatric Collector">
                 </div>
@@ -337,7 +395,7 @@
                 </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <img src="Asset/Rectangle-34-8.webp" alt="Pediatric Collector">
                 </div>
@@ -348,7 +406,7 @@
                 </div>
             </div>
             
-            <div class="product-card">
+            <div class="product-card hover-lift hover-glow">
                 <div class="product-image">
                     <span class="sale-badge">Sale</span>
                     <img src="Asset/Rectangle-46-1.webp" alt="Pediatric Collector">
@@ -554,6 +612,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/SplitText.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
 <script src="script.js"></script>
   </body>
 </html>
