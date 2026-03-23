@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
     }, 300);
 });
 
-// ── Smooth scroll (Lenis) ────────────────────────────────────────────────────
+
 try {
     if (typeof Lenis !== 'undefined') {
         const lenis = new Lenis({
@@ -23,23 +23,23 @@ try {
         });
 
         if (typeof gsap !== 'undefined') {
-            // Single integration path: GSAP ticker drives Lenis
+            
             if (typeof ScrollTrigger !== 'undefined') {
                 lenis.on('scroll', ScrollTrigger.update);
             }
             gsap.ticker.add((time) => { lenis.raf(time * 1000); });
             gsap.ticker.lagSmoothing(0);
         } else {
-            // Fallback rAF loop when GSAP is absent
+            
             (function raf(time) { lenis.raf(time); requestAnimationFrame(raf); })(0);
         }
     }
-} catch (e) { /* Lenis not available on this page */ }
+} catch (e) {  }
 
-// ── DOM Ready ────────────────────────────────────────────────────────────────
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── Mobile nav ──────────────────────────────────────────────────────────
+    
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.classList.add('js-ready');
 
-    // ── GSAP plugins ────────────────────────────────────────────────────────
+    
     try {
         if (typeof gsap !== 'undefined') {
             if (typeof SplitText !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch (e) { console.warn('GSAP plugin registration error:', e); }
 
-    // ── SVG draw paths ──────────────────────────────────────────────────────
+    
     if (typeof gsap !== 'undefined') {
         document.querySelectorAll('.draw-path').forEach(path => {
             if (typeof path.getTotalLength !== 'function') return;
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Hero Slider ─────────────────────────────────────────────────────────
+    
     let currentSlide = 0;
     const slides      = document.querySelectorAll('.hero-slide');
     const dots        = document.querySelectorAll('.dot');
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startAutoPlay();
     }
 
-    // ── Scroll Reveal (GSAP) ────────────────────────────────────────────────
+    
     if (typeof gsap !== 'undefined') {
         const revealConfigs = [
             { trigger: '.features',          target: '.feature-item',                   y: 30, stagger: 0.2 },
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activateVisibleReveals();
     });
 
-    // ── Counters ─────────────────────────────────────────────────────────────
+    
     if (typeof gsap !== 'undefined') {
         document.querySelectorAll('.counter').forEach(counter => {
             const target = +counter.getAttribute('data-target');
@@ -243,13 +243,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Card hover lift ──────────────────────────────────────────────────────
+    
     document.querySelectorAll('.card, .product-card, .recent-card, .iso-card').forEach(card => {
         card.addEventListener('mouseenter', () => { if (!card.classList.contains('iso-card')) card.style.transform = 'translateY(-10px)'; });
         card.addEventListener('mouseleave', () => { if (!card.classList.contains('iso-card')) card.style.transform = 'translateY(0)'; });
     });
 
-    // ── FAQ (legacy .faq-header variant) ────────────────────────────────────
+    
     document.querySelectorAll('.faq-header').forEach(header => {
         header.addEventListener('click', () => {
             const item = header.parentElement;
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── SplitText hero headings ──────────────────────────────────────────────
+    
     if (typeof SplitText !== 'undefined' && typeof gsap !== 'undefined') {
         document.fonts.ready.then(() => {
             document.querySelectorAll('.animate-me').forEach(el => {
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Cart localStorage helpers ────────────────────────────────────────────
+    
     const cartCountEls = document.querySelectorAll('.cart-count');
 
     function getCart() {
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateCartCountDisplay();
 
-    // ── Add-to-cart (shop grids) ─────────────────────────────────────────────
+    
     document.querySelectorAll('.add-to-cart').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const card = e.target.closest('.product-card');
@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Global qty delegation (non-cart pages) ───────────────────────────────
+    
     document.addEventListener('click', (e) => {
         const minus = e.target.closest('.minus-btn');
         const plus  = e.target.closest('.plus-btn');
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Declared at DOMContentLoaded scope so cart page renderer can call it too
+    
     function updateCartItemQty(row, newQty) {
         const id = row.dataset.id; if (!id) return;
         let cart = getCart();
@@ -343,11 +343,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (item) { item.quantity = parseInt(newQty) || 1; saveCart(cart); if (typeof renderCart === 'function') renderCart(); }
     }
 
-    // ── Cart page ────────────────────────────────────────────────────────────
+    
     const cartPage = document.querySelector('.cart-page');
     if (cartPage) {
 
-        // Expose renderCart so updateCartItemQty above can call it
+        
         var renderCart = function () {
             const cart          = getCart();
             const tbody         = document.querySelector('.cart-table tbody');
@@ -440,10 +440,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        renderCart(); // Initial render — replaces static placeholder rows
+        renderCart(); 
     }
 
-    // ── Form validation ──────────────────────────────────────────────────────
+    
     document.querySelectorAll('#loginForm, #signupForm, #contactForm').forEach(form => {
         form.setAttribute('novalidate', true);
         form.addEventListener('submit', (e) => {
@@ -480,9 +480,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-}); // end DOMContentLoaded
+}); 
 
-// ── FAQ accordion (.faq-question variant — global delegation) ────────────────
+
 document.addEventListener('click', (e) => {
     const question = e.target.closest('.faq-question');
     if (!question) return;
@@ -511,13 +511,13 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ── Shop filters ─────────────────────────────────────────────────────────────
+
 (function initShopFilters() {
     const grid = document.getElementById('shop-grid');
     if (!grid) return;
 
     const cards      = () => Array.from(grid.querySelectorAll('.product-card'));
-    const countEl    = document.getElementById('shop-results-count'); // matches HTML id
+    const countEl    = document.getElementById('shop-results-count'); 
     const noResults  = document.getElementById('shop-no-results');
     const priceRange = document.getElementById('price-range');
     const priceLabel = document.getElementById('price-max-label');

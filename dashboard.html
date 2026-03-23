@@ -21,10 +21,10 @@
         padding: 0 !important;
       }
 
-      /* ============================================================ LAYOUT */
+      
       .dashboard-wrapper { display: flex; min-height: 100vh; }
 
-      /* ============================================================ OVERLAY */
+      
       .sidebar-overlay {
         display: none; position: fixed; inset: 0;
         background: rgba(0,0,0,0.45); z-index: 199;
@@ -32,7 +32,7 @@
       }
       .sidebar-overlay.active { display: block; }
 
-      /* ============================================================ SIDEBAR */
+      
       .dash-sidebar {
         width: 260px; min-height: 100vh;
         background: var(--dark-blue);
@@ -97,10 +97,10 @@
       .dash-user-name { font-size: 13px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .dash-user-role { font-size: 11px; color: rgba(255,255,255,0.4); }
 
-      /* ============================================================ MAIN */
+      
       .dash-main { margin-left: 260px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; min-width: 0; }
 
-      /* ============================================================ TOPBAR */
+      
       .dash-topbar {
         background: #fff; padding: 0 28px; height: 52px;
         display: flex; align-items: center; justify-content: space-between;
@@ -117,7 +117,7 @@
       }
       .dash-hamburger:hover { background: #e8f0fe; }
 
-      /* ---- Go Back Button ---- */
+      
       .go-back-btn {
         display: inline-flex; align-items: center; gap: 7px;
         background: #f0f4f8; border: 1px solid #e2e8f0; border-radius: 8px;
@@ -162,10 +162,10 @@
         font-size: 13px; font-weight: 700; color: #fff; cursor: pointer; flex-shrink: 0;
       }
 
-      /* ============================================================ BODY */
+      
       .dash-body { padding: 24px 28px; flex: 1; }
 
-      /* ============================================================ WELCOME */
+      
       .welcome-banner {
         background: linear-gradient(135deg, var(--dark-blue) 0%, #1e4a8a 55%, var(--primary-blue) 100%);
         border-radius: 16px; padding: 24px 28px;
@@ -192,7 +192,7 @@
       }
       .wb-btn-secondary:hover { background: rgba(255,255,255,0.2); }
 
-      /* ============================================================ STATS */
+      
       .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 22px; }
       .stat-card {
         background: #fff; border-radius: 14px; padding: 20px 22px;
@@ -213,7 +213,7 @@
       .stat-delta.down { color: #e53e3e; }
       .stat-bar { position: absolute; bottom: 0; left: 0; height: 3px; border-radius: 0 0 14px 14px; background: linear-gradient(90deg, var(--primary-blue), #4facfe); }
 
-      /* ============================================================ MID ROW */
+      
       .dash-mid-row { display: grid; grid-template-columns: 1fr 310px; gap: 16px; margin-bottom: 22px; }
 
       .chart-card, .top-products-card, .orders-card, .inventory-card {
@@ -231,7 +231,7 @@
       .chart-area { height: 190px; position: relative; overflow: hidden; }
       .chart-area svg { width: 100%; height: 100%; }
 
-      /* Top Products */
+      
       .product-rank-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f4f8; }
       .product-rank-item:last-child { border-bottom: none; }
       .rank-num { width: 22px; height: 22px; border-radius: 5px; background: #f0f4f8; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
@@ -246,11 +246,11 @@
       .rank-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-blue), #4facfe); border-radius: 4px; }
       .rank-revenue { font-size: 12px; font-weight: 700; color: var(--dark-blue); flex-shrink: 0; }
 
-      /* ============================================================ BOTTOM ROW */
+      
       .dash-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
       .dash-right-col  { display: flex; flex-direction: column; gap: 16px; }
 
-      /* Orders table */
+      
       .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .orders-table { width: 100%; border-collapse: collapse; min-width: 420px; }
       .orders-table th { text-align: left; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; padding: 0 8px 10px 0; border-bottom: 1px solid #f0f4f8; }
@@ -266,7 +266,7 @@
       .status-badge.cancelled  { background: #fff0f0; color: #dc2626; }
       .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-      /* Inventory */
+      
       .inv-item { display: flex; align-items: center; gap: 11px; padding: 10px 0; border-bottom: 1px solid #f0f4f8; }
       .inv-item:last-child { border-bottom: none; }
       .inv-img { width: 42px; height: 42px; border-radius: 8px; background: #f0f4f8; object-fit: cover; flex-shrink: 0; }
@@ -284,7 +284,7 @@
       .inv-pct.low      { color: #f97316; }
       .inv-pct.ok       { color: #22c55e; }
 
-      /* Activity */
+      
       .activity-item { display: flex; gap: 11px; padding: 10px 0; border-bottom: 1px solid #f0f4f8; font-size: 13px; }
       .activity-item:last-child { border-bottom: none; }
       .act-dot { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
@@ -297,7 +297,7 @@
       .view-all-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--primary-blue); text-decoration: none; transition: gap 0.2s; white-space: nowrap; }
       .view-all-link:hover { gap: 7px; }
 
-      /* ============================================================ MOBILE BOTTOM NAV */
+      
       .mobile-bottom-nav {
         display: none; position: fixed; bottom: 0; left: 0; right: 0;
         background: #fff; border-top: 1px solid #e8edf2; z-index: 150;
@@ -308,14 +308,14 @@
       .mobile-bottom-nav a.active { color: var(--primary-blue); }
       .mobile-bottom-nav a .mbn-icon { font-size: 20px; }
 
-      /* ============================================================ BREAKPOINTS */
+      
 
-      /* 1200px */
+      
       @media (max-width: 1200px) {
         .dash-mid-row { grid-template-columns: 1fr; }
       }
 
-      /* 1024px */
+      
       @media (max-width: 1024px) {
         .stats-grid { grid-template-columns: repeat(2,1fr); }
         .dash-bottom-row { grid-template-columns: 1fr; }
@@ -323,46 +323,46 @@
         .dash-right-col > * { flex: 1 1 280px; }
       }
 
-      /* 768px — full mobile */
+      
       @media (max-width: 768px) {
-        /* Sidebar off-screen */
+        
         .dash-sidebar { transform: translateX(-100%); }
         .dash-sidebar.open { transform: translateX(0); box-shadow: 4px 0 32px rgba(0,0,0,0.25); }
         .sidebar-close-btn { display: flex; }
 
-        /* Main full width */
+        
         .dash-main { margin-left: 0; }
 
-        /* Hamburger on */
+        
         .dash-hamburger { display: flex; }
 
-        /* Topbar */
+        
         .dash-topbar { padding: 0 14px; height: 50px; }
         .dash-search { display: none; }
 
-        /* Body */
+        
         .dash-body { padding: 14px; padding-bottom: 76px; }
 
-        /* Welcome */
+        
         .welcome-banner { flex-direction: column; align-items: flex-start; padding: 18px; gap: 14px; }
         .welcome-text h2 { font-size: 16px; }
         .welcome-text p  { font-size: 12px; }
         .welcome-actions { width: 100%; }
         .welcome-actions a { flex: 1; text-align: center; display: flex; justify-content: center; }
 
-        /* Stats */
+        
         .stats-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
 
-        /* Mid/Bottom */
+        
         .dash-mid-row    { grid-template-columns: 1fr; gap: 14px; margin-bottom: 14px; }
         .dash-bottom-row { grid-template-columns: 1fr; gap: 14px; }
         .dash-right-col  { flex-direction: column; gap: 14px; }
 
-        /* Bottom nav on */
+        
         .mobile-bottom-nav { display: block; }
       }
 
-      /* 480px */
+      
       @media (max-width: 480px) {
         .stats-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
         .stat-card { padding: 14px 16px; }
@@ -375,7 +375,7 @@
 
         .dash-page-title { font-size: 14px; }
 
-        /* Icon-only go-back on tiny screens */
+        
         .go-back-btn .go-back-label { display: none; }
         .go-back-btn { padding: 7px 10px; }
 
@@ -390,7 +390,7 @@
 
   <body>
 
-    <!-- Preloader -->
+    
     <div id="preloader">
       <div class="preloader-inner">
         <div class="preloader-ripple"></div>
@@ -400,12 +400,12 @@
       <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
     </div>
 
-    <!-- Sidebar backdrop -->
+    
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="dashboard-wrapper">
 
-      <!-- =========== SIDEBAR =========== -->
+      
       <aside class="dash-sidebar" id="dashSidebar">
 
         <div class="dash-sidebar-logo">
@@ -446,15 +446,15 @@
 
       </aside>
 
-      <!-- =========== MAIN =========== -->
+      
       <div class="dash-main">
 
-        <!-- Top Bar -->
+        
         <div class="dash-topbar">
           <div class="dash-topbar-left">
             <button class="dash-hamburger" id="dashHamburger" aria-label="Open menu">☰</button>
 
-            <!-- Go Back Button -->
+            
             <a href="index.html" class="go-back-btn" id="goBackBtn">
               <svg viewBox="0 0 24 24">
                 <line x1="19" y1="12" x2="5" y2="12"/>
@@ -472,10 +472,10 @@
           </div>
         </div>
 
-        <!-- Body -->
+        
         <div class="dash-body">
 
-          <!-- Welcome -->
+          
           <div class="welcome-banner">
             <div class="welcome-text">
               <h2>Good morning, John 👋</h2>
@@ -487,7 +487,7 @@
             </div>
           </div>
 
-          <!-- Stats -->
+          
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-card-top"><span class="stat-label">Total Revenue</span><div class="stat-icon blue">💰</div></div>
@@ -515,10 +515,10 @@
             </div>
           </div>
 
-          <!-- Mid Row -->
+          
           <div class="dash-mid-row">
 
-            <!-- Chart -->
+            
             <div class="chart-card">
               <div class="card-header">
                 <div><div class="card-title">Revenue Overview</div><div class="card-subtitle">Monthly sales performance</div></div>
@@ -557,7 +557,7 @@
               </div>
             </div>
 
-            <!-- Top Products -->
+            
             <div class="top-products-card">
               <div class="card-header">
                 <div><div class="card-title">Top Products</div><div class="card-subtitle">By revenue this month</div></div>
@@ -598,10 +598,10 @@
 
           </div>
 
-          <!-- Bottom Row -->
+          
           <div class="dash-bottom-row">
 
-            <!-- Recent Orders -->
+            
             <div class="orders-card">
               <div class="card-header">
                 <div><div class="card-title">Recent Orders</div><div class="card-subtitle">Last 5 transactions</div></div>
@@ -623,10 +623,10 @@
               </div>
             </div>
 
-            <!-- Right Column -->
+            
             <div class="dash-right-col">
 
-              <!-- Inventory Alerts -->
+              
               <div class="inventory-card">
                 <div class="card-header">
                   <div><div class="card-title">Inventory Alerts</div><div class="card-subtitle">Low stock warnings</div></div>
@@ -649,7 +649,7 @@
                 </div>
               </div>
 
-              <!-- Recent Activity -->
+              
               <div class="orders-card">
                 <div class="card-header"><div class="card-title">Recent Activity</div></div>
                 <div class="activity-item"><div class="act-dot order">🛍️</div><div><div class="act-desc">New order #ORD-5821 placed by Dr. Sarah Chen</div><div class="act-time">2 hours ago</div></div></div>
@@ -661,11 +661,11 @@
             </div>
           </div>
 
-        </div><!-- end dash-body -->
-      </div><!-- end dash-main -->
-    </div><!-- end dashboard-wrapper -->
+        </div>
+      </div>
+    </div>
 
-    <!-- Mobile Bottom Nav -->
+    
     <nav class="mobile-bottom-nav">
       <ul>
         <li><a href="dashboard.html" class="active"><span class="mbn-icon">📊</span><span>Dashboard</span></a></li>
@@ -680,7 +680,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
     <script>
-      /* ---- Sidebar open / close ---- */
+      
       const sidebar   = document.getElementById('dashSidebar');
       const overlay   = document.getElementById('sidebarOverlay');
       const hamburger = document.getElementById('dashHamburger');
@@ -694,12 +694,12 @@
       overlay.addEventListener('click', closeSidebar);
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
 
-      /* ---- Go Back: smart history navigation ---- */
+      
       document.getElementById('goBackBtn').addEventListener('click', function(e) {
         if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
       });
 
-      /* ---- Chart tabs ---- */
+      
       document.querySelectorAll('.chart-tab').forEach(tab => {
         tab.addEventListener('click', function() {
           document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
@@ -707,7 +707,7 @@
         });
       });
 
-      /* ---- Count-up ---- */
+      
       function countUp(el, target, prefix) {
         let n = 0;
         const step = target / (1200 / 16);
