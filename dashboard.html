@@ -3,253 +3,736 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Dashboard - Stackly Medical Equipment</title>
+    <title>Dashboard - Stackly Medical</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="animations.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/webp" href="Asset/favicon.webp" />
+    <style>
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f0f4f8;
+        color: var(--text-main);
+        min-height: 100vh;
+        padding: 0 !important;
+      }
+
+      /* ============================================================ LAYOUT */
+      .dashboard-wrapper { display: flex; min-height: 100vh; }
+
+      /* ============================================================ OVERLAY */
+      .sidebar-overlay {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.45); z-index: 199;
+        backdrop-filter: blur(2px);
+      }
+      .sidebar-overlay.active { display: block; }
+
+      /* ============================================================ SIDEBAR */
+      .dash-sidebar {
+        width: 260px; min-height: 100vh;
+        background: var(--dark-blue);
+        display: flex; flex-direction: column;
+        position: fixed; top: 0; left: 0; z-index: 200;
+        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+        overflow-y: auto; overflow-x: hidden;
+      }
+
+      .dash-sidebar-logo {
+        padding: 20px 24px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        display: flex; align-items: center; justify-content: space-between;
+        flex-shrink: 0;
+      }
+      .dash-sidebar-logo img { height: 34px; filter: brightness(0) invert(1); }
+
+      .sidebar-close-btn {
+        display: none; background: rgba(255,255,255,0.08); border: none;
+        color: rgba(255,255,255,0.7); width: 30px; height: 30px;
+        border-radius: 6px; font-size: 18px; cursor: pointer;
+        align-items: center; justify-content: center; flex-shrink: 0;
+        transition: background 0.2s;
+      }
+      .sidebar-close-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+      .dash-nav { padding: 16px 0; flex: 1; }
+
+      .dash-nav-label {
+        font-size: 10px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; color: rgba(255,255,255,0.3);
+        padding: 14px 24px 5px; display: block;
+      }
+
+      .dash-nav-item {
+        display: flex; align-items: center; gap: 12px;
+        padding: 11px 24px; color: rgba(255,255,255,0.6);
+        text-decoration: none; font-size: 14px; font-weight: 500;
+        border-left: 3px solid transparent; transition: all 0.2s; white-space: nowrap;
+      }
+      .dash-nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; border-left-color: rgba(255,255,255,0.25); }
+      .dash-nav-item.active { background: rgba(0,97,255,0.18); color: #fff; border-left-color: var(--primary-blue); }
+      .nav-icon { font-size: 17px; width: 22px; text-align: center; flex-shrink: 0; }
+
+      .dash-nav-badge {
+        margin-left: auto; background: var(--primary-blue); color: #fff;
+        font-size: 10px; font-weight: 700; padding: 2px 7px;
+        border-radius: 20px; flex-shrink: 0;
+      }
+
+      .dash-sidebar-footer {
+        padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0;
+      }
+      .dash-user-mini { display: flex; align-items: center; gap: 10px; }
+      .dash-avatar {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-blue), #4facfe);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
+      }
+      .dash-user-info { flex: 1; min-width: 0; }
+      .dash-user-name { font-size: 13px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .dash-user-role { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+      /* ============================================================ MAIN */
+      .dash-main { margin-left: 260px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; min-width: 0; }
+
+      /* ============================================================ TOPBAR */
+      .dash-topbar {
+        background: #fff; padding: 0 28px; height: 52px;
+        display: flex; align-items: center; justify-content: space-between;
+        border-bottom: 1px solid #e8edf2; position: sticky; top: 0; z-index: 100;
+        gap: 12px; flex-shrink: 0;
+      }
+      .dash-topbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+
+      .dash-hamburger {
+        display: none; background: #f0f4f8; border: 1px solid #e2e8f0;
+        border-radius: 8px; width: 38px; height: 38px;
+        align-items: center; justify-content: center; font-size: 18px;
+        cursor: pointer; flex-shrink: 0; color: var(--dark-blue); transition: background 0.2s;
+      }
+      .dash-hamburger:hover { background: #e8f0fe; }
+
+      /* ---- Go Back Button ---- */
+      .go-back-btn {
+        display: inline-flex; align-items: center; gap: 7px;
+        background: #f0f4f8; border: 1px solid #e2e8f0; border-radius: 8px;
+        padding: 7px 14px; font-size: 13px; font-weight: 600; color: var(--dark-blue);
+        text-decoration: none; cursor: pointer; transition: all 0.2s;
+        flex-shrink: 0; white-space: nowrap;
+      }
+      .go-back-btn:hover {
+        background: #e8f0fe; border-color: var(--primary-blue);
+        color: var(--primary-blue); transform: translateX(-2px);
+      }
+      .go-back-btn svg {
+        width: 14px; height: 14px; stroke: currentColor; fill: none;
+        stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
+      }
+
+      .dash-page-title { font-size: 17px; font-weight: 700; color: var(--dark-blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+      .dash-topbar-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+      .dash-search {
+        display: flex; align-items: center; gap: 8px;
+        background: #f0f4f8; border: 1px solid #e2e8f0; border-radius: 8px;
+        padding: 8px 14px; font-size: 13px; color: var(--text-muted);
+        cursor: pointer; transition: border-color 0.2s; white-space: nowrap;
+      }
+      .dash-search:hover { border-color: var(--primary-blue); }
+
+      .dash-icon-btn {
+        width: 38px; height: 38px; border-radius: 8px;
+        background: #f0f4f8; border: 1px solid #e2e8f0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 16px; cursor: pointer; position: relative; transition: all 0.2s; flex-shrink: 0;
+      }
+      .dash-icon-btn:hover { background: #e8f0fe; border-color: var(--primary-blue); }
+      .notif-dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; background: #e53e3e; border-radius: 50%; border: 2px solid #fff; }
+
+      .topbar-avatar {
+        width: 38px; height: 38px; border-radius: 8px;
+        background: linear-gradient(135deg, var(--primary-blue), #4facfe);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 13px; font-weight: 700; color: #fff; cursor: pointer; flex-shrink: 0;
+      }
+
+      /* ============================================================ BODY */
+      .dash-body { padding: 24px 28px; flex: 1; }
+
+      /* ============================================================ WELCOME */
+      .welcome-banner {
+        background: linear-gradient(135deg, var(--dark-blue) 0%, #1e4a8a 55%, var(--primary-blue) 100%);
+        border-radius: 16px; padding: 24px 28px;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 16px; margin-bottom: 22px; position: relative; overflow: hidden;
+      }
+      .welcome-banner::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; background:rgba(255,255,255,0.05); border-radius:50%; pointer-events:none; }
+      .welcome-banner::after  { content:''; position:absolute; bottom:-80px; right:200px; width:250px; height:250px; background:rgba(255,255,255,0.04); border-radius:50%; pointer-events:none; }
+      .welcome-text { z-index: 1; }
+      .welcome-text h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 5px; }
+      .welcome-text p  { font-size: 13px; color: rgba(255,255,255,0.6); }
+      .welcome-actions { display: flex; gap: 10px; z-index: 1; flex-shrink: 0; }
+      .wb-btn-primary {
+        background: #fff; color: var(--dark-blue); border: none; padding: 9px 18px;
+        border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer;
+        text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; white-space: nowrap;
+      }
+      .wb-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+      .wb-btn-secondary {
+        background: rgba(255,255,255,0.12); color: #fff;
+        border: 1px solid rgba(255,255,255,0.25); padding: 9px 18px;
+        border-radius: 8px; font-size: 13px; font-weight: 600;
+        cursor: pointer; text-decoration: none; transition: background 0.2s; white-space: nowrap;
+      }
+      .wb-btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+      /* ============================================================ STATS */
+      .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 22px; }
+      .stat-card {
+        background: #fff; border-radius: 14px; padding: 20px 22px;
+        border: 1px solid #e8edf2; position: relative; overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+      .stat-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+      .stat-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+      .stat-icon { width: 38px; height: 38px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+      .stat-icon.blue   { background: #e8f0fe; }
+      .stat-icon.green  { background: #e6fff3; }
+      .stat-icon.orange { background: #fff5e6; }
+      .stat-icon.red    { background: #fff0f0; }
+      .stat-value { font-size: 26px; font-weight: 800; color: var(--dark-blue); line-height: 1; margin-bottom: 7px; }
+      .stat-delta { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+      .stat-delta.up   { color: #22c55e; }
+      .stat-delta.down { color: #e53e3e; }
+      .stat-bar { position: absolute; bottom: 0; left: 0; height: 3px; border-radius: 0 0 14px 14px; background: linear-gradient(90deg, var(--primary-blue), #4facfe); }
+
+      /* ============================================================ MID ROW */
+      .dash-mid-row { display: grid; grid-template-columns: 1fr 310px; gap: 16px; margin-bottom: 22px; }
+
+      .chart-card, .top-products-card, .orders-card, .inventory-card {
+        background: #fff; border-radius: 14px; padding: 22px; border: 1px solid #e8edf2;
+      }
+
+      .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+      .card-title { font-size: 15px; font-weight: 700; color: var(--dark-blue); }
+      .card-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+      .chart-tabs { display: flex; gap: 3px; background: #f0f4f8; border-radius: 8px; padding: 3px; flex-shrink: 0; }
+      .chart-tab { padding: 5px 11px; border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; border: none; background: none; }
+      .chart-tab.active { background: #fff; color: var(--dark-blue); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+      .chart-area { height: 190px; position: relative; overflow: hidden; }
+      .chart-area svg { width: 100%; height: 100%; }
+
+      /* Top Products */
+      .product-rank-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f4f8; }
+      .product-rank-item:last-child { border-bottom: none; }
+      .rank-num { width: 22px; height: 22px; border-radius: 5px; background: #f0f4f8; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
+      .rank-num.gold   { background: #fef3c7; color: #d97706; }
+      .rank-num.silver { background: #f1f5f9; color: #64748b; }
+      .rank-num.bronze { background: #fef0e6; color: #c2751a; }
+      .rank-img { width: 38px; height: 38px; border-radius: 7px; object-fit: cover; background: #f0f4f8; flex-shrink: 0; }
+      .rank-info { flex: 1; min-width: 0; }
+      .rank-name { font-size: 12px; font-weight: 600; color: var(--dark-blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .rank-cat  { font-size: 10px; color: var(--text-muted); }
+      .rank-bar-wrap { width: 50px; height: 4px; background: #f0f4f8; border-radius: 4px; overflow: hidden; margin-top: 3px; }
+      .rank-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-blue), #4facfe); border-radius: 4px; }
+      .rank-revenue { font-size: 12px; font-weight: 700; color: var(--dark-blue); flex-shrink: 0; }
+
+      /* ============================================================ BOTTOM ROW */
+      .dash-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .dash-right-col  { display: flex; flex-direction: column; gap: 16px; }
+
+      /* Orders table */
+      .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .orders-table { width: 100%; border-collapse: collapse; min-width: 420px; }
+      .orders-table th { text-align: left; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; padding: 0 8px 10px 0; border-bottom: 1px solid #f0f4f8; }
+      .orders-table th:last-child { padding-right: 0; }
+      .orders-table td { padding: 11px 8px 11px 0; font-size: 13px; color: var(--text-main); border-bottom: 1px solid #f8fafc; vertical-align: middle; }
+      .orders-table td:last-child { padding-right: 0; }
+      .orders-table tr:last-child td { border-bottom: none; }
+      .order-id { font-weight: 600; color: var(--primary-blue); font-size: 12px; }
+      .status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+      .status-badge.delivered  { background: #e6fff3; color: #16a34a; }
+      .status-badge.processing { background: #e8f0fe; color: #1d4ed8; }
+      .status-badge.pending    { background: #fff5e6; color: #c2751a; }
+      .status-badge.cancelled  { background: #fff0f0; color: #dc2626; }
+      .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+      /* Inventory */
+      .inv-item { display: flex; align-items: center; gap: 11px; padding: 10px 0; border-bottom: 1px solid #f0f4f8; }
+      .inv-item:last-child { border-bottom: none; }
+      .inv-img { width: 42px; height: 42px; border-radius: 8px; background: #f0f4f8; object-fit: cover; flex-shrink: 0; }
+      .inv-info { flex: 1; min-width: 0; }
+      .inv-name { font-size: 13px; font-weight: 600; color: var(--dark-blue); }
+      .inv-stock { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+      .inv-level { width: 72px; flex-shrink: 0; }
+      .inv-level-bar { height: 6px; background: #f0f4f8; border-radius: 4px; overflow: hidden; margin-bottom: 3px; }
+      .inv-level-fill { height: 100%; border-radius: 4px; }
+      .inv-level-fill.critical { background: #ef4444; }
+      .inv-level-fill.low      { background: #f97316; }
+      .inv-level-fill.ok       { background: #22c55e; }
+      .inv-pct { font-size: 11px; font-weight: 700; text-align: right; }
+      .inv-pct.critical { color: #ef4444; }
+      .inv-pct.low      { color: #f97316; }
+      .inv-pct.ok       { color: #22c55e; }
+
+      /* Activity */
+      .activity-item { display: flex; gap: 11px; padding: 10px 0; border-bottom: 1px solid #f0f4f8; font-size: 13px; }
+      .activity-item:last-child { border-bottom: none; }
+      .act-dot { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+      .act-dot.order { background: #e8f0fe; }
+      .act-dot.stock { background: #fff5e6; }
+      .act-dot.user  { background: #e6fff3; }
+      .act-desc { color: var(--dark-blue); font-weight: 500; font-size: 13px; line-height: 1.4; }
+      .act-time { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+
+      .view-all-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--primary-blue); text-decoration: none; transition: gap 0.2s; white-space: nowrap; }
+      .view-all-link:hover { gap: 7px; }
+
+      /* ============================================================ MOBILE BOTTOM NAV */
+      .mobile-bottom-nav {
+        display: none; position: fixed; bottom: 0; left: 0; right: 0;
+        background: #fff; border-top: 1px solid #e8edf2; z-index: 150;
+        padding: 6px 0 env(safe-area-inset-bottom, 6px);
+      }
+      .mobile-bottom-nav ul { display: flex; list-style: none; justify-content: space-around; }
+      .mobile-bottom-nav a { display: flex; flex-direction: column; align-items: center; gap: 2px; text-decoration: none; font-size: 10px; font-weight: 600; color: var(--text-muted); padding: 4px 8px; border-radius: 8px; transition: color 0.2s; }
+      .mobile-bottom-nav a.active { color: var(--primary-blue); }
+      .mobile-bottom-nav a .mbn-icon { font-size: 20px; }
+
+      /* ============================================================ BREAKPOINTS */
+
+      /* 1200px */
+      @media (max-width: 1200px) {
+        .dash-mid-row { grid-template-columns: 1fr; }
+      }
+
+      /* 1024px */
+      @media (max-width: 1024px) {
+        .stats-grid { grid-template-columns: repeat(2,1fr); }
+        .dash-bottom-row { grid-template-columns: 1fr; }
+        .dash-right-col { flex-direction: row; flex-wrap: wrap; }
+        .dash-right-col > * { flex: 1 1 280px; }
+      }
+
+      /* 768px — full mobile */
+      @media (max-width: 768px) {
+        /* Sidebar off-screen */
+        .dash-sidebar { transform: translateX(-100%); }
+        .dash-sidebar.open { transform: translateX(0); box-shadow: 4px 0 32px rgba(0,0,0,0.25); }
+        .sidebar-close-btn { display: flex; }
+
+        /* Main full width */
+        .dash-main { margin-left: 0; }
+
+        /* Hamburger on */
+        .dash-hamburger { display: flex; }
+
+        /* Topbar */
+        .dash-topbar { padding: 0 14px; height: 50px; }
+        .dash-search { display: none; }
+
+        /* Body */
+        .dash-body { padding: 14px; padding-bottom: 76px; }
+
+        /* Welcome */
+        .welcome-banner { flex-direction: column; align-items: flex-start; padding: 18px; gap: 14px; }
+        .welcome-text h2 { font-size: 16px; }
+        .welcome-text p  { font-size: 12px; }
+        .welcome-actions { width: 100%; }
+        .welcome-actions a { flex: 1; text-align: center; display: flex; justify-content: center; }
+
+        /* Stats */
+        .stats-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+
+        /* Mid/Bottom */
+        .dash-mid-row    { grid-template-columns: 1fr; gap: 14px; margin-bottom: 14px; }
+        .dash-bottom-row { grid-template-columns: 1fr; gap: 14px; }
+        .dash-right-col  { flex-direction: column; gap: 14px; }
+
+        /* Bottom nav on */
+        .mobile-bottom-nav { display: block; }
+      }
+
+      /* 480px */
+      @media (max-width: 480px) {
+        .stats-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
+        .stat-card { padding: 14px 16px; }
+        .stat-value { font-size: 20px; }
+        .stat-icon { width: 32px; height: 32px; font-size: 14px; }
+        .stat-label { font-size: 10px; }
+
+        .welcome-text h2 { font-size: 14px; }
+        .wb-btn-primary, .wb-btn-secondary { font-size: 12px; padding: 8px 10px; }
+
+        .dash-page-title { font-size: 14px; }
+
+        /* Icon-only go-back on tiny screens */
+        .go-back-btn .go-back-label { display: none; }
+        .go-back-btn { padding: 7px 10px; }
+
+        .chart-tabs { display: none; }
+
+        .orders-table { min-width: 320px; }
+        .orders-table td, .orders-table th { font-size: 11px; padding-right: 6px; }
+      }
+
+    </style>
   </head>
-  <body class="dashboard-page">
-    <!-- Top Nav (Standard) -->
-    <nav class="top-nav">
-      <div class="container">
-        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <ul class="nav-links">
-          <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Home <span class="arrow-down"></span></a>
-            <ul class="dropdown-content">
-              <li><a href="index.html">Home 1</a></li>
-              <li><a href="index2.html">Home 2</a></li>
-            </ul>
-          </li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="service.html">Services</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="dashboard.html" class="active">Dashboard</a></li>
-          <li class="mobile-auth-links"><a href="login.html">Login</a></li>
-          <li class="mobile-auth-links"><a href="signup.html">Register</a></li>
-        </ul>
-        <div class="user-actions">
-          <div class="auth-desktop">
-            <a href="login.html" class="login-link">Login</a> or
-            <a href="signup.html" class="register-link">Register</a>
-          </div>
-          <a href="cart.html" class="cart-link">
-            <img src="Asset/cart.webp" alt="Cart" /> My Cart:
-            <span class="cart-count">0</span>
-          </a>
-        </div>
-      </div>
-    </nav>
 
-    <!-- Main Header (Standard) -->
-    <header class="main-header">
-      <div class="container">
-        <div class="logo">
-          <a href="index.html"><img src="Asset/logo.webp" alt="Stackly Logo" /></a>
-        </div>
-        <div class="contact-info">
-          <p class="phone-label">Call Us:9876543210</p>
-          <p class="hours">from 8:00am to 9:00pm (Mon-Sun) FREE by US</p>
-        </div>
-      </div>
-    </header>
+  <body>
 
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-        <div class="container">
-            <a href="index.html">Home</a> / <span>Dashboard</span>
-        </div>
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="preloader-inner">
+        <div class="preloader-ripple"></div>
+        <div class="preloader-ripple"></div>
+        <img src="Asset/logo.webp" alt="Loading..." class="preloader-logo">
+      </div>
+      <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
     </div>
 
-    <!-- Dashboard Main -->
-    <main class="dashboard-section">
-        <div class="container dashboard-container">
-            <!-- Sidebar Navigation -->
-            <aside class="dashboard-sidebar">
-                <div class="user-profile-brief">
-                    <div class="user-avatar">JD</div>
-                    <div class="user-info">
-                        <h3>John Doe</h3>
-                        <p>john.doe@example.com</p>
-                    </div>
-                </div>
-                <ul class="dashboard-nav">
-                    <li><a href="#" class="active"><span class="nav-icon">📊</span> Overview</a></li>
-                    <li><a href="#"><span class="nav-icon">📦</span> My Orders</a></li>
-                    <li><a href="#"><span class="nav-icon">📄</span> Prescriptions</a></li>
-                    <li><a href="#"><span class="nav-icon">❤️</span> Health Profile</a></li>
-                    <li><a href="#"><span class="nav-icon">⚙️</span> Settings</a></li>
-                    <li><a href="#" class="logout-btn"><span class="nav-icon">🚪</span> Logout</a></li>
-                </ul>
-            </aside>
+    <!-- Sidebar backdrop -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-            <!-- Dashboard Content -->
-            <div class="dashboard-content">
-                <!-- Welcome Banner -->
-                <div class="dashboard-header">
-                    <h2>Welcome back, John!</h2>
-                    <p>Here's what's happening with your account today.</p>
-                </div>
+    <div class="dashboard-wrapper">
 
-                <!-- Stats Grid -->
-                <div class="dashboard-metrics">
-                    <div class="metric-card">
-                        <div class="metric-icon orders">🛒</div>
-                        <div class="metric-data">
-                            <h4>Total Orders</h4>
-                            <span class="value">12</span>
-                        </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon points">⭐</div>
-                        <div class="metric-data">
-                            <h4>Loyalty Points</h4>
-                            <span class="value">450</span>
-                        </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon active">💊</div>
-                        <div class="metric-data">
-                            <h4>Active Prescriptions</h4>
-                            <span class="value">2</span>
-                        </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon health">👨‍⚕️</div>
-                        <div class="metric-data">
-                            <h4>Health Score</h4>
-                            <span class="value">85/100</span>
-                        </div>
-                    </div>
-                </div>
+      <!-- =========== SIDEBAR =========== -->
+      <aside class="dash-sidebar" id="dashSidebar">
 
-                <div class="dashboard-grid">
-                    <!-- Recent Orders Table -->
-                    <div class="dashboard-panel">
-                        <div class="panel-header">
-                            <h3>Recent Orders</h3>
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="dashboard-table">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Date</th>
-                                        <th>Product</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#SK-9823</td>
-                                        <td>Oct 24, 2023</td>
-                                        <td>Digital Thermometer</td>
-                                        <td>$15.00</td>
-                                        <td><span class="status-badge success">Delivered</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#SK-9751</td>
-                                        <td>Oct 12, 2023</td>
-                                        <td>Blood Analyzer Pro</td>
-                                        <td>$120.00</td>
-                                        <td><span class="status-badge processing">Processing</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#SK-9642</td>
-                                        <td>Sep 28, 2023</td>
-                                        <td>Advanced Stethoscope</td>
-                                        <td>$89.00</td>
-                                        <td><span class="status-badge success">Delivered</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Health Snapshot -->
-                    <div class="dashboard-panel">
-                        <div class="panel-header">
-                            <h3>Health Snapshot</h3>
-                            <button class="edit-btn">Edit</button>
-                        </div>
-                        <div class="health-metrics">
-                            <div class="health-item">
-                                <span class="label">BMI Index</span>
-                                <div class="health-bar-container">
-                                    <div class="health-bar" style="width: 65%;"></div>
-                                </div>
-                                <span class="stat">22.5 (Normal)</span>
-                            </div>
-                            <div class="health-item">
-                                <span class="label">Blood Pressure</span>
-                                <span class="stat">120/80 mmHg</span>
-                            </div>
-                            <div class="health-item">
-                                <span class="label">Last Checkup</span>
-                                <span class="stat">Oct 05, 2023</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="dashboard-panel full-width">
-                        <div class="panel-header">
-                            <h3>Quick Actions</h3>
-                        </div>
-                        <div class="dashboard-quick-actions">
-                            <a href="#" class="quick-action-card">
-                                <div class="qa-icon">📤</div>
-                                <h4>Upload Prescription</h4>
-                                <p>Get your medicines faster</p>
-                            </a>
-                            <a href="#" class="quick-action-card">
-                                <div class="qa-icon">🔄</div>
-                                <h4>Refill Request</h4>
-                                <p>Automatic medicine refill</p>
-                            </a>
-                            <a href="#" class="quick-action-card">
-                                <div class="qa-icon">📍</div>
-                                <h4>Manage Address</h4>
-                                <p>Set your delivery location</p>
-                            </a>
-                            <a href="#" class="quick-action-card">
-                                <div class="qa-icon">💬</div>
-                                <h4>Consult Doctor</h4>
-                                <p>Book an online session</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="dash-sidebar-logo">
+          <img src="Asset/logo.webp" alt="Stackly Logo" />
+          <button class="sidebar-close-btn" id="sidebarClose" aria-label="Close sidebar">✕</button>
         </div>
-    </main>
 
-    <!-- Footer (Standard) -->
-    <footer class="main-footer">
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="footer-logo">
-                    <img src="Asset/logo.webp" alt="Stackly Logo">
-                </div>
-                <p class="copyright">&copy; 2026 Stackly. All Rights Reserved. </p>
+        <nav class="dash-nav">
+          <span class="dash-nav-label">Main</span>
+          <a href="dashboard.html" class="dash-nav-item active"><span class="nav-icon">📊</span> Dashboard</a>
+          <a href="shop.html"      class="dash-nav-item"><span class="nav-icon">🛍️</span> Products</a>
+          <a href="cart.html"      class="dash-nav-item"><span class="nav-icon">🛒</span> Orders <span class="dash-nav-badge">12</span></a>
+
+          <span class="dash-nav-label">Management</span>
+          <a href="./404.html" class="dash-nav-item"><span class="nav-icon">👥</span> Customers</a>
+          <a href="./404.html" class="dash-nav-item"><span class="nav-icon">📦</span> Inventory <span class="dash-nav-badge">3</span></a>
+          <a href="./404.html" class="dash-nav-item"><span class="nav-icon">📈</span> Analytics</a>
+          <a href="./404.html" class="dash-nav-item"><span class="nav-icon">💳</span> Payments</a>
+
+          <span class="dash-nav-label">Content</span>
+          <a href="blog.html"    class="dash-nav-item"><span class="nav-icon">📰</span> Blog</a>
+          <a href="service.html" class="dash-nav-item"><span class="nav-icon">🔬</span> Services</a>
+
+          <span class="dash-nav-label">Account</span>
+          <a href="./404.html" class="dash-nav-item"><span class="nav-icon">⚙️</span> Settings</a>
+          <a href="login.html" class="dash-nav-item"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+
+        <div class="dash-sidebar-footer">
+          <div class="dash-user-mini">
+            <div class="dash-avatar">JD</div>
+            <div class="dash-user-info">
+              <div class="dash-user-name">John Doe</div>
+              <div class="dash-user-role">Admin</div>
             </div>
+          </div>
         </div>
-    </footer>
 
+      </aside>
+
+      <!-- =========== MAIN =========== -->
+      <div class="dash-main">
+
+        <!-- Top Bar -->
+        <div class="dash-topbar">
+          <div class="dash-topbar-left">
+            <button class="dash-hamburger" id="dashHamburger" aria-label="Open menu">☰</button>
+
+            <!-- Go Back Button -->
+            <a href="index.html" class="go-back-btn" id="goBackBtn">
+              <svg viewBox="0 0 24 24">
+                <line x1="19" y1="12" x2="5" y2="12"/>
+                <polyline points="12 19 5 12 12 5"/>
+              </svg>
+              <span class="go-back-label">Go Back</span>
+            </a>
+
+            <div class="dash-page-title">Dashboard</div>
+          </div>
+
+          <div class="dash-topbar-right">
+            <div class="dash-icon-btn">🔔<span class="notif-dot"></span></div>
+            <div class="topbar-avatar">JD</div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="dash-body">
+
+          <!-- Welcome -->
+          <div class="welcome-banner">
+            <div class="welcome-text">
+              <h2>Good morning, John 👋</h2>
+              <p>Here's what's happening at Stackly Medical today — Monday, March 23, 2026</p>
+            </div>
+            <div class="welcome-actions">
+              <a href="shop.html"    class="wb-btn-primary">Browse Shop</a>
+              <a href="contact.html" class="wb-btn-secondary">Contact Support</a>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-label">Total Revenue</span><div class="stat-icon blue">💰</div></div>
+              <div class="stat-value">$48,320</div>
+              <div class="stat-delta up">↑ 12.5% vs last month</div>
+              <div class="stat-bar" style="width:72%"></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-label">Total Orders</span><div class="stat-icon green">📦</div></div>
+              <div class="stat-value">1,284</div>
+              <div class="stat-delta up">↑ 8.2% vs last month</div>
+              <div class="stat-bar" style="width:60%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-label">Active Customers</span><div class="stat-icon orange">👥</div></div>
+              <div class="stat-value">3,871</div>
+              <div class="stat-delta up">↑ 5.1% vs last month</div>
+              <div class="stat-bar" style="width:55%;background:linear-gradient(90deg,#f97316,#fb923c)"></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-label">Pending Shipments</span><div class="stat-icon red">🚚</div></div>
+              <div class="stat-value">47</div>
+              <div class="stat-delta down">↓ 3 from yesterday</div>
+              <div class="stat-bar" style="width:30%;background:linear-gradient(90deg,#ef4444,#f87171)"></div>
+            </div>
+          </div>
+
+          <!-- Mid Row -->
+          <div class="dash-mid-row">
+
+            <!-- Chart -->
+            <div class="chart-card">
+              <div class="card-header">
+                <div><div class="card-title">Revenue Overview</div><div class="card-subtitle">Monthly sales performance</div></div>
+                <div class="chart-tabs">
+                  <button class="chart-tab">7D</button>
+                  <button class="chart-tab active">1M</button>
+                  <button class="chart-tab">3M</button>
+                  <button class="chart-tab">1Y</button>
+                </div>
+              </div>
+              <div class="chart-area">
+                <svg viewBox="0 0 600 190" preserveAspectRatio="none">
+                  <line x1="0" y1="47"  x2="600" y2="47"  stroke="#f0f4f8" stroke-width="1"/>
+                  <line x1="0" y1="95"  x2="600" y2="95"  stroke="#f0f4f8" stroke-width="1"/>
+                  <line x1="0" y1="143" x2="600" y2="143" stroke="#f0f4f8" stroke-width="1"/>
+                  <defs>
+                    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%"   stop-color="#0061ff" stop-opacity="0.15"/>
+                      <stop offset="100%" stop-color="#0061ff" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,155 C30,135 60,115 100,96 C140,76 160,87 200,66 C240,47 260,77 300,57 C340,38 380,67 420,47 C460,27 500,52 540,37 L560,33 L600,42 L600,190 L0,190 Z" fill="url(#areaGrad)"/>
+                  <path d="M0,155 C30,135 60,115 100,96 C140,76 160,87 200,66 C240,47 260,77 300,57 C340,38 380,67 420,47 C460,27 500,52 540,37 L560,33 L600,42" fill="none" stroke="#0061ff" stroke-width="2.5" stroke-linecap="round"/>
+                  <circle cx="100" cy="96" r="4" fill="#0061ff"/>
+                  <circle cx="200" cy="66" r="4" fill="#0061ff"/>
+                  <circle cx="300" cy="57" r="4" fill="#0061ff"/>
+                  <circle cx="420" cy="47" r="4" fill="#0061ff"/>
+                  <circle cx="540" cy="37" r="5" fill="#fff" stroke="#0061ff" stroke-width="2.5"/>
+                  <text x="0"   y="186" font-size="11" fill="#718096" font-family="Inter">Jan</text>
+                  <text x="90"  y="186" font-size="11" fill="#718096" font-family="Inter">Feb</text>
+                  <text x="190" y="186" font-size="11" fill="#718096" font-family="Inter">Mar</text>
+                  <text x="290" y="186" font-size="11" fill="#718096" font-family="Inter">Apr</text>
+                  <text x="400" y="186" font-size="11" fill="#718096" font-family="Inter">May</text>
+                  <text x="520" y="186" font-size="11" fill="#718096" font-family="Inter">Jun</text>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Top Products -->
+            <div class="top-products-card">
+              <div class="card-header">
+                <div><div class="card-title">Top Products</div><div class="card-subtitle">By revenue this month</div></div>
+                <a href="shop.html" class="view-all-link">View all →</a>
+              </div>
+
+              <div class="product-rank-item">
+                <div class="rank-num gold">1</div>
+                <img src="Asset/Rectangle-14-24-600x600.webp" alt="" class="rank-img">
+                <div class="rank-info"><div class="rank-name">Blood Analyzer Pro</div><div class="rank-cat">Analyzers</div><div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:92%"></div></div></div>
+                <div class="rank-revenue">$12,480</div>
+              </div>
+              <div class="product-rank-item">
+                <div class="rank-num silver">2</div>
+                <img src="Asset/Rectangle-14-31-420x560.webp" alt="" class="rank-img">
+                <div class="rank-info"><div class="rank-name">Ophthalmic Projector</div><div class="rank-cat">Apparel</div><div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:74%"></div></div></div>
+                <div class="rank-revenue">$9,750</div>
+              </div>
+              <div class="product-rank-item">
+                <div class="rank-num bronze">3</div>
+                <img src="Asset/Rectangle-14-22.webp" alt="" class="rank-img">
+                <div class="rank-info"><div class="rank-name">Advanced Stethoscope</div><div class="rank-cat">Analyzers</div><div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:58%"></div></div></div>
+                <div class="rank-revenue">$7,120</div>
+              </div>
+              <div class="product-rank-item">
+                <div class="rank-num">4</div>
+                <img src="Asset/Rectangle-34-8.webp" alt="" class="rank-img">
+                <div class="rank-info"><div class="rank-name">Nursing Kit</div><div class="rank-cat">Nursing</div><div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:43%"></div></div></div>
+                <div class="rank-revenue">$5,325</div>
+              </div>
+              <div class="product-rank-item">
+                <div class="rank-num">5</div>
+                <img src="Asset/Rectangle-14-23.webp" alt="" class="rank-img">
+                <div class="rank-info"><div class="rank-name">Diagnostic Station</div><div class="rank-cat">Nursing</div><div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:31%"></div></div></div>
+                <div class="rank-revenue">$3,840</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Row -->
+          <div class="dash-bottom-row">
+
+            <!-- Recent Orders -->
+            <div class="orders-card">
+              <div class="card-header">
+                <div><div class="card-title">Recent Orders</div><div class="card-subtitle">Last 5 transactions</div></div>
+                <a href="cart.html" class="view-all-link">View all →</a>
+              </div>
+              <div class="table-scroll">
+                <table class="orders-table">
+                  <thead>
+                    <tr><th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><span class="order-id">#ORD-5821</span></td><td>Dr. Sarah Chen</td><td><strong>$480.00</strong></td><td><span class="status-badge delivered"><span class="status-dot"></span>Delivered</span></td><td>Mar 22</td></tr>
+                    <tr><td><span class="order-id">#ORD-5820</span></td><td>James Wilson</td><td><strong>$89.00</strong></td><td><span class="status-badge processing"><span class="status-dot"></span>Processing</span></td><td>Mar 22</td></tr>
+                    <tr><td><span class="order-id">#ORD-5819</span></td><td>Michael Ross</td><td><strong>$1,250.00</strong></td><td><span class="status-badge delivered"><span class="status-dot"></span>Delivered</span></td><td>Mar 21</td></tr>
+                    <tr><td><span class="order-id">#ORD-5818</span></td><td>Emily Carter</td><td><strong>$320.00</strong></td><td><span class="status-badge pending"><span class="status-dot"></span>Pending</span></td><td>Mar 21</td></tr>
+                    <tr><td><span class="order-id">#ORD-5817</span></td><td>Robert Kim</td><td><strong>$75.00</strong></td><td><span class="status-badge cancelled"><span class="status-dot"></span>Cancelled</span></td><td>Mar 20</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="dash-right-col">
+
+              <!-- Inventory Alerts -->
+              <div class="inventory-card">
+                <div class="card-header">
+                  <div><div class="card-title">Inventory Alerts</div><div class="card-subtitle">Low stock warnings</div></div>
+                  <a href="./404.html" class="view-all-link">Manage →</a>
+                </div>
+                <div class="inv-item">
+                  <img src="Asset/Rectangle-27-1.webp" alt="" class="inv-img">
+                  <div class="inv-info"><div class="inv-name">Disposable Needle Set</div><div class="inv-stock">8 units left</div></div>
+                  <div class="inv-level"><div class="inv-level-bar"><div class="inv-level-fill critical" style="width:8%"></div></div><div class="inv-pct critical">8%</div></div>
+                </div>
+                <div class="inv-item">
+                  <img src="Asset/Rectangle-46-1.webp" alt="" class="inv-img">
+                  <div class="inv-info"><div class="inv-name">Syringe Pack (50 units)</div><div class="inv-stock">23 units left</div></div>
+                  <div class="inv-level"><div class="inv-level-bar"><div class="inv-level-fill low" style="width:23%"></div></div><div class="inv-pct low">23%</div></div>
+                </div>
+                <div class="inv-item">
+                  <img src="Asset/Rectangle-34-9.webp" alt="" class="inv-img">
+                  <div class="inv-info"><div class="inv-name">Mask N95</div><div class="inv-stock">67 units left</div></div>
+                  <div class="inv-level"><div class="inv-level-bar"><div class="inv-level-fill ok" style="width:67%"></div></div><div class="inv-pct ok">67%</div></div>
+                </div>
+              </div>
+
+              <!-- Recent Activity -->
+              <div class="orders-card">
+                <div class="card-header"><div class="card-title">Recent Activity</div></div>
+                <div class="activity-item"><div class="act-dot order">🛍️</div><div><div class="act-desc">New order #ORD-5821 placed by Dr. Sarah Chen</div><div class="act-time">2 hours ago</div></div></div>
+                <div class="activity-item"><div class="act-dot stock">⚠️</div><div><div class="act-desc">Low stock alert: Disposable Needle Set (8 left)</div><div class="act-time">4 hours ago</div></div></div>
+                <div class="activity-item"><div class="act-dot user">👤</div><div><div class="act-desc">New customer registered: Emily Carter</div><div class="act-time">Yesterday, 3:45 PM</div></div></div>
+                <div class="activity-item"><div class="act-dot order">✅</div><div><div class="act-desc">Order #ORD-5819 delivered to Michael Ross</div><div class="act-time">Yesterday, 11:20 AM</div></div></div>
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- end dash-body -->
+      </div><!-- end dash-main -->
+    </div><!-- end dashboard-wrapper -->
+
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-bottom-nav">
+      <ul>
+        <li><a href="dashboard.html" class="active"><span class="mbn-icon">📊</span><span>Dashboard</span></a></li>
+        <li><a href="shop.html"><span class="mbn-icon">🛍️</span><span>Shop</span></a></li>
+        <li><a href="cart.html"><span class="mbn-icon">🛒</span><span>Orders</span></a></li>
+        <li><a href="./404.html"><span class="mbn-icon">📦</span><span>Stock</span></a></li>
+        <li><a href="./404.html"><span class="mbn-icon">⚙️</span><span>Settings</span></a></li>
+      </ul>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
+    <script>
+      /* ---- Sidebar open / close ---- */
+      const sidebar   = document.getElementById('dashSidebar');
+      const overlay   = document.getElementById('sidebarOverlay');
+      const hamburger = document.getElementById('dashHamburger');
+      const closeBtn  = document.getElementById('sidebarClose');
+
+      function openSidebar()  { sidebar.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+      function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+
+      hamburger.addEventListener('click', openSidebar);
+      closeBtn.addEventListener('click', closeSidebar);
+      overlay.addEventListener('click', closeSidebar);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+
+      /* ---- Go Back: smart history navigation ---- */
+      document.getElementById('goBackBtn').addEventListener('click', function(e) {
+        if (window.history.length > 1) { e.preventDefault(); window.history.back(); }
+      });
+
+      /* ---- Chart tabs ---- */
+      document.querySelectorAll('.chart-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      /* ---- Count-up ---- */
+      function countUp(el, target, prefix) {
+        let n = 0;
+        const step = target / (1200 / 16);
+        const t = setInterval(() => {
+          n = Math.min(n + step, target);
+          el.textContent = prefix + Math.floor(n).toLocaleString();
+          if (n >= target) clearInterval(t);
+        }, 16);
+      }
+
+      window.addEventListener('load', () => {
+        [48320, 1284, 3871, 47].forEach((v, i) => {
+          countUp(document.querySelectorAll('.stat-value')[i], v, ['$','','',''][i]);
+        });
+
+        if (typeof gsap !== 'undefined') {
+          gsap.from('.welcome-banner',    { opacity:0, y:20, duration:0.6, ease:'power2.out' });
+          gsap.from('.stat-card',         { opacity:0, y:20, duration:0.5, stagger:0.1, ease:'power2.out', delay:0.2 });
+          gsap.from('.chart-card',        { opacity:0, y:20, duration:0.5, ease:'power2.out', delay:0.5 });
+          gsap.from('.top-products-card', { opacity:0, x:20, duration:0.5, ease:'power2.out', delay:0.6 });
+          gsap.from('.orders-card',       { opacity:0, y:20, duration:0.5, stagger:0.12, ease:'power2.out', delay:0.7 });
+          gsap.from('.inventory-card',    { opacity:0, y:20, duration:0.5, ease:'power2.out', delay:0.8 });
+        }
+      });
+    </script>
+
   </body>
 </html>

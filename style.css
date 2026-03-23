@@ -814,10 +814,6 @@ img {
   text-align: left;
 }
 
-a {
-  color: var(--color-orangey)
-}
-
 .card {
     position: relative;
     background: #e9edf2;
@@ -1828,31 +1824,7 @@ a {
     margin-bottom: 10px;
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 60px;
-}
 
-.pagination a {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #EDEDED;
-    text-decoration: none;
-    color: var(--text-main);
-    border-radius: 4px;
-    transition: 0.3s;
-}
-
-.pagination a.active, .pagination a:hover {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    border-color: var(--primary-blue);
-}
 
 @media (max-width: 992px) {
     .shop-container {
@@ -4942,4 +4914,18 @@ a {
         max-width: 300px;
         padding: 20px;
     }
+}
+
+/* Blog main inner container — overrides generic .container flex */
+.blog-main-inner {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 50px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  align-items: start;
+  flex-direction: unset;
+}
+@media (max-width: 1024px) {
+  .blog-main-inner { grid-template-columns: 1fr; }
 }

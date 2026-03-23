@@ -78,14 +78,104 @@
     
     <section class="hero-v2">
       <div class="hero-v2-bg">
-         <img src="Asset/medical-hero-v2.png" alt="Medical Team" class="bg-img">
+         <img src="Asset/medical-hero-v2.png" alt="Medical Team" class="bg-img" onerror="this.style.display='none'">
          <div class="gradient-overlay"></div>
       </div>
-      <div class="container hero-v2-content">
-        <div class="hero-v2-text">
-          <p class="sub-heading reveal">Weekly sale 60% off</p>
-          <h1 class="animate-me">INTENSIVE MEDICARE</h1>
-          <a href="shop.html" class="buy-now-btn reveal">BUY ONLINE</a>
+      <!-- Inline style ensures hero is always visible even if bg image 404s -->
+      <style>
+        .hero-v2 {
+          background: linear-gradient(135deg, #1a365d 0%, #004ecc 40%, #0061ff 70%, #003080 100%);
+        }
+        .hero-v2-bg img { opacity: 0.35; }
+        .hero-v2-content { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .hero-v2-split { display: flex; align-items: center; justify-content: space-between; gap: 60px; width: 100%; }
+        .hero-v2-left { flex: 1; max-width: 600px; }
+        .hero-v2-right { flex: 1; display: flex; flex-direction: column; gap: 20px; align-items: flex-end; }
+        .hero-promo-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 18px; border-radius: 40px; font-size: 13px; font-weight: 600; letter-spacing: 1px; margin-bottom: 20px; }
+        .hero-promo-tag .tag-dot { width: 8px; height: 8px; background: #60a5fa; border-radius: 50%; animation: blink 1.4s ease-in-out infinite; }
+        @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+        .hero-v2-text h1 { font-size: clamp(40px, 6vw, 84px); font-weight: 800; line-height: 1; margin-bottom: 20px; letter-spacing: -1px; color: #fff; }
+        .hero-v2-text h1 span { color: #93c5fd; }
+        .hero-sub-desc { font-size: 17px; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 36px; max-width: 480px; }
+        .hero-v2-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-cta-primary { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #1a365d; padding: 15px 32px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 15px; transition: all 0.3s; }
+        .hero-cta-primary:hover { background: #e8f0fe; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+        .hero-cta-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #fff; padding: 15px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 15px; border: 2px solid rgba(255,255,255,0.4); transition: all 0.3s; }
+        .hero-cta-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+        .hero-stat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .hero-stat-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 24px 20px; color: #fff; transition: 0.3s; }
+        .hero-stat-card:hover { background: rgba(255,255,255,0.18); transform: translateY(-4px); }
+        .stat-card-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+        .stat-card-value { font-size: 32px; font-weight: 800; color: #fff; line-height: 1; }
+        .stat-card-label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+        .hero-trust-bar { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding: 14px 20px; background: rgba(255,255,255,0.08); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); }
+        .trust-avatars { display: flex; }
+        .trust-avatars span { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.6); background: linear-gradient(135deg,#93c5fd,#0061ff); display: flex; align-items: center; justify-content: center; font-size: 12px; margin-left: -8px; }
+        .trust-avatars span:first-child { margin-left: 0; }
+        .trust-text { font-size: 13px; color: rgba(255,255,255,0.85); }
+        .trust-text strong { color: #fff; }
+        @media(max-width:991px){
+          .hero-v2-split{flex-direction:column;text-align:center;gap:40px;}
+          .hero-v2-right{align-items:center;width:100%;}
+          .hero-v2-actions{justify-content:center;}
+          .hero-sub-desc{margin:0 auto 36px;}
+          .hero-stat-cards{grid-template-columns:repeat(2,1fr);}
+          .hero-trust-bar{justify-content:center;}
+        }
+        @media(max-width:480px){.hero-stat-cards{grid-template-columns:1fr 1fr;gap:12px;}.hero-stat-card{padding:18px 14px;}.stat-card-value{font-size:26px;}}
+      </style>
+      <div class="hero-v2-content">
+        <div class="hero-v2-split">
+          <!-- Left: Text content -->
+          <div class="hero-v2-left hero-v2-text">
+            <div class="hero-promo-tag">
+              <span class="tag-dot"></span>
+              WEEKLY SALE — UP TO 60% OFF
+            </div>
+            <h1>INTENSIVE<br><span>MEDICARE</span></h1>
+            <p class="hero-sub-desc">
+              Professional-grade medical equipment trusted by clinics worldwide. From diagnostics to surgical tools — all in one place.
+            </p>
+            <div class="hero-v2-actions">
+              <a href="shop.html" class="hero-cta-primary">
+                🛒 Shop Now
+              </a>
+              <a href="service.html" class="hero-cta-secondary">
+                Our Services →
+              </a>
+            </div>
+            <div class="hero-trust-bar">
+              <div class="trust-avatars">
+                <span>👨‍⚕️</span><span>👩‍⚕️</span><span>🧑‍⚕️</span>
+              </div>
+              <p class="trust-text"><strong>2,400+</strong> healthcare professionals trust Stackly</p>
+            </div>
+          </div>
+          <!-- Right: Stat cards -->
+          <div class="hero-v2-right">
+            <div class="hero-stat-cards">
+              <div class="hero-stat-card">
+                <span class="stat-card-icon">🩺</span>
+                <div class="stat-card-value">500+</div>
+                <div class="stat-card-label">Medical Products</div>
+              </div>
+              <div class="hero-stat-card">
+                <span class="stat-card-icon">🏥</span>
+                <div class="stat-card-value">15+</div>
+                <div class="stat-card-label">Global Partners</div>
+              </div>
+              <div class="hero-stat-card">
+                <span class="stat-card-icon">✅</span>
+                <div class="stat-card-value">100%</div>
+                <div class="stat-card-label">Quality Certified</div>
+              </div>
+              <div class="hero-stat-card">
+                <span class="stat-card-icon">🚚</span>
+                <div class="stat-card-value">24h</div>
+                <div class="stat-card-label">Fast Delivery</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
